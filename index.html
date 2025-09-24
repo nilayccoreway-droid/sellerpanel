@@ -1,13 +1,814 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Marketplace Seller Dashboard</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>Marketplace</h1>
+                <p>Seller Dashboard</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#" data-page="dashboard" class="nav-link active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="#" data-page="orders" class="nav-link"><i class="fas fa-shopping-cart"></i> Orders <span class="badge">16</span></a></li>
+                    <li><a href="#" data-page="products" class="nav-link"><i class="fas fa-box"></i> Products <span class="badge">63</span></a></li>
+                    <li><a href="#" data-page="transactions" class="nav-link"><i class="fas fa-credit-card"></i> Transactions</a></li>
+                    <li><a href="#" data-page="reviews" class="nav-link"><i class="fas fa-star"></i> Reviews</a></li>
+                    <li><a href="#" data-page="support" class="nav-link"><i class="fas fa-question-circle"></i> Support</a></li>
+                    <li><a href="#" data-page="selling-fees" class="nav-link"><i class="fas fa-calculator"></i> Selling Fees Calculator</a></li>
+                    <li><a href="#" data-page="credit-card" class="nav-link"><i class="fas fa-credit-card"></i> Credit Card Management</a></li>
+                    <li><a href="#" data-page="scoring" class="nav-link"><i class="fas fa-target"></i> Scoring</a></li>
+                    <li><a href="#" data-page="abandoned-cart" class="nav-link"><i class="fas fa-shopping-bag"></i> Abandoned Cart</a></li>
+                    <li><a href="#" data-page="sales-report" class="nav-link"><i class="fas fa-chart-bar"></i> Sales Report</a></li>
+                    <li><a href="#" data-page="promotion" class="nav-link"><i class="fas fa-gift"></i> Promotion</a></li>
+                    <li><a href="#" data-page="membership" class="nav-link"><i class="fas fa-users"></i> Membership</a></li>
+                    <li><a href="#" data-page="settings" class="nav-link"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <p class="user-name">John Seller</p>
+                        <p class="user-status">Premium Account</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h1>Seller Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <button class="header-btn">
+                        <i class="fas fa-comment"></i>
+                        <span class="notification-dot green"></span>
+                    </button>
+                    <button class="header-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-dot red"></span>
+                    </button>
+                    <div class="user-menu">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="user-info">
+                            <p class="user-name">John Seller</p>
+                            <p class="user-status">Premium</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="page-content">
+                <!-- Dashboard Page -->
+                <div id="dashboard-page" class="page active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-content">
+                                <div class="stat-info">
+                                    <p class="stat-label">Orders</p>
+                                    <p class="stat-value">16</p>
+                                </div>
+                                <div class="stat-icon orange"></div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-content">
+                                <div class="stat-info">
+                                    <p class="stat-label">Products</p>
+                                    <p class="stat-value">63</p>
+                                </div>
+                                <div class="stat-icon gray"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="lifetime-sales">
+                            <h3>Lifetime Sales</h3>
+                            <p class="sales-amount">₹ 320.29K</p>
+                            <div class="sales-chart">
+                                <div class="chart-placeholder">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <p>Sales visualization</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="map-section">
+                            <div class="map-placeholder">
+                                <div class="map-indicator"></div>
+                                <div class="map-data">
+                                    <span class="data-point">₹85,156 ₹ 85,156.4</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widgets">
+                            <div class="widget">
+                                <h4>Transaction</h4>
+                                <div class="transaction-list">
+                                    <div class="transaction-item">
+                                        <span>MRKPL00001</span>
+                                        <span>$150.00</span>
+                                    </div>
+                                    <div class="transaction-item">
+                                        <span>MRKPL00002</span>
+                                        <span>$89.99</span>
+                                    </div>
+                                    <div class="transaction-item">
+                                        <span>MRKPL00003</span>
+                                        <span>$75.50</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget">
+                                <h4>Activities</h4>
+                                <div class="activity-list">
+                                    <div class="activity-item">
+                                        <div class="activity-time">Jun 14</div>
+                                        <div class="activity-text">New order received</div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-time">Jun 13</div>
+                                        <div class="activity-text">Product updated</div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-time">Jun 12</div>
+                                        <div class="activity-text">Customer inquiry</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Latest Orders Table -->
+                    <div class="table-section">
+                        <div class="table-header">
+                            <h3>Latest Orders</h3>
+                            <button class="btn-link">View All Orders</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order</th>
+                                        <th>Date/Time</th>
+                                        <th>Products</th>
+                                        <th>Base Total</th>
+                                        <th>Purchase Total</th>
+                                        <th>Tax</th>
+                                        <th>Status</th>
+                                        <th>View</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>100000001</td>
+                                        <td>Jun 14, 2024 8:45 PM</td>
+                                        <td>Ring - Accessories<br>Bag - Women Product</td>
+                                        <td>$140.00</td>
+                                        <td>$150.00</td>
+                                        <td>test tax</td>
+                                        <td><span class="status processing">Processing</span></td>
+                                        <td><button class="btn-link">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>100000002</td>
+                                        <td>Jun 14, 2024 7:30 PM</td>
+                                        <td>Ring - Accessories<br>Bag - Women Product</td>
+                                        <td>$120.00</td>
+                                        <td>$130.00</td>
+                                        <td>test tax</td>
+                                        <td><span class="status completed">Completed</span></td>
+                                        <td><button class="btn-link">View</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Page -->
+                <div id="products-page" class="page">
+                    <div class="page-header">
+                        <h2>Marketplace Product List</h2>
+                    </div>
+                    
+                    <div class="table-controls">
+                        <div class="controls-left">
+                            <select class="control-select">
+                                <option>Actions</option>
+                                <option>Delete Selected</option>
+                                <option>Enable Selected</option>
+                                <option>Disable Selected</option>
+                            </select>
+                            <span class="records-count">67 records found</span>
+                        </div>
+                        <div class="controls-right">
+                            <button class="btn-secondary"><i class="fas fa-filter"></i> Filters</button>
+                            <button class="btn-secondary"><i class="fas fa-eye"></i> Default View <i class="fas fa-chevron-down"></i></button>
+                            <button class="btn-secondary"><i class="fas fa-columns"></i> Columns <i class="fas fa-chevron-down"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="pagination-controls">
+                        <select class="records-per-page">
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <span>per page</span>
+                        <div class="pagination">
+                            <button class="page-btn">‹</button>
+                            <span>4 of 4</span>
+                            <button class="page-btn">›</button>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="products-table">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox"></th>
+                                    <th>ID ↓</th>
+                                    <th>Thumbnail</th>
+                                    <th>Name</th>
+                                    <th>Attribute Set</th>
+                                    <th>Product Status</th>
+                                    <th>Status</th>
+                                    <th>Type</th>
+                                    <th>SKU</th>
+                                    <th>Qty</th>
+                                    <th>Qty Sold</th>
+                                    <th>Qty Confirmed</th>
+                                    <th>Qty Pending</th>
+                                    <th>Price</th>
+                                    <th>Created At</th>
+                                    <th>Visibility</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>226</td>
+                                    <td><img src="https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=1" alt="Product"></td>
+                                    <td>sdffsdf</td>
+                                    <td>Necklaces</td>
+                                    <td><span class="status-dot red">●</span> Disabled</td>
+                                    <td><span class="status-dot red">●</span> Disapproved</td>
+                                    <td>Simple</td>
+                                    <td>ZUS14439-010-5851921</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>¥12,312</td>
+                                    <td>Jul 11, 2025 7:29:23 PM</td>
+                                    <td>Catalog, Search</td>
+                                    <td><button class="btn-edit" onclick="showProductEdit()"><i class="fas fa-edit"></i></button></td>
+                                </tr>
+                                <tr class="row-alt">
+                                    <td><input type="checkbox"></td>
+                                    <td>227</td>
+                                    <td><img src="https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=1" alt="Product"></td>
+                                    <td>wefwwe</td>
+                                    <td>Ring</td>
+                                    <td><span class="status-dot red">●</span> Disabled</td>
+                                    <td><span class="status-dot red">●</span> Disapproved</td>
+                                    <td>Simple</td>
+                                    <td>ZUS14439-011-3843095</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>¥123,123</td>
+                                    <td>Jul 11, 2025 7:43:23 PM</td>
+                                    <td>Catalog, Search</td>
+                                    <td><button class="btn-edit" onclick="showProductEdit()"><i class="fas fa-edit"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>232</td>
+                                    <td><img src="https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=1" alt="Product"></td>
+                                    <td>Silver ring with diamond</td>
+                                    <td>Ring</td>
+                                    <td><span class="status-dot green">●</span> Enabled</td>
+                                    <td><span class="status-dot green">●</span> Approved</td>
+                                    <td></td>
+                                    <td>ZUS142-011-7190617</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>¥50,000</td>
+                                    <td>Sep 19, 2025 6:50:43 PM</td>
+                                    <td>Not Visible Individually</td>
+                                    <td><button class="btn-edit" onclick="showProductEdit()"><i class="fas fa-edit"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Product Edit Page -->
+                <div id="product-edit-page" class="page">
+                    <div class="page-header">
+                        <div class="header-left">
+                            <button class="btn-back" onclick="showProducts()"><i class="fas fa-arrow-left"></i></button>
+                            <h2>Edit Product</h2>
+                        </div>
+                        <div class="header-right">
+                            <button class="btn-secondary">Back To List</button>
+                            <button class="btn-primary">Save & Continue</button>
+                            <button class="btn-success">Save</button>
+                        </div>
+                    </div>
+
+                    <div class="form-container">
+                        <div class="form-section">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Name *</label>
+                                    <input type="text" value="Ring" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>Attribute Set *</label>
+                                    <select class="form-input">
+                                        <option>Ring</option>
+                                        <option>Necklace</option>
+                                        <option>Bracelet</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>SKU</label>
+                                    <input type="text" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>Weight</label>
+                                    <input type="text" class="form-input">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Stock Availability *</label>
+                                    <select class="form-input">
+                                        <option>In Stock</option>
+                                        <option>Out of Stock</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tax Class</label>
+                                    <select class="form-input">
+                                        <option>Select Tax Class</option>
+                                        <option>Taxable</option>
+                                        <option>Non-Taxable</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Price Information -->
+                            <div class="price-section">
+                                <h3>Price Information</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Price Type</label>
+                                        <div class="radio-group">
+                                            <label><input type="radio" name="priceType" value="Fixed" checked> Fixed</label>
+                                            <label><input type="radio" name="priceType" value="Dynamic"> Dynamic</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Price *</label>
+                                        <input type="number" class="form-input">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Images -->
+                            <div class="images-section">
+                                <div class="section-header">
+                                    <h3>Product Images</h3>
+                                    <button class="btn-link">Add More</button>
+                                </div>
+                                <div class="images-grid">
+                                    <div class="image-item">
+                                        <img src="https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&dpr=1" alt="Product">
+                                        <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                    <div class="image-item">
+                                        <img src="https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&dpr=1" alt="Product">
+                                        <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                    <div class="image-upload">
+                                        <i class="fas fa-upload"></i>
+                                    </div>
+                                </div>
+                                <p class="help-text">You can upload multiple images by clicking on the above area. Only JPG, JPEG, PNG, GIF files are allowed.</p>
+                            </div>
+
+                            <!-- Career Stone Information -->
+                            <div class="dark-section">
+                                <div class="section-header">
+                                    <h3>Career Stone Information</h3>
+                                    <button class="btn-primary-sm">Add</button>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Career Stone Trade Name</label>
+                                        <select class="form-input-dark">
+                                            <option>Select an option</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Career Stone Weight</label>
+                                        <select class="form-input-dark">
+                                            <option>Select an option</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Career Stone Minimum Weight</label>
+                                        <select class="form-input-dark">
+                                            <option>Select an option</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promotion Page -->
+                <div id="promotion-page" class="page">
+                    <div class="page-header">
+                        <h2>Campaigns</h2>
+                    </div>
+
+                    <div class="tabs-container">
+                        <div class="tabs">
+                            <button class="tab active" data-tab="all-promotion">All Promotion</button>
+                            <button class="tab" data-tab="participation-promotion">Participation Promotion</button>
+                        </div>
+
+                        <div class="tab-content active" id="all-promotion">
+                            <div class="search-controls">
+                                <div class="search-box">
+                                    <input type="text" placeholder="Search by keyword" class="search-input">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div class="controls-right">
+                                    <button class="btn-secondary"><i class="fas fa-filter"></i> Filters</button>
+                                    <button class="btn-secondary"><i class="fas fa-eye"></i> Default View <i class="fas fa-chevron-down"></i></button>
+                                    <button class="btn-secondary"><i class="fas fa-columns"></i> Columns <i class="fas fa-chevron-down"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="table-info">
+                                <span>1 records found</span>
+                                <div class="pagination-controls">
+                                    <select class="records-per-page">
+                                        <option value="20">20</option>
+                                    </select>
+                                    <span>per page</span>
+                                    <div class="pagination">
+                                        <button class="page-btn">‹</button>
+                                        <span>1 of 1</span>
+                                        <button class="page-btn">›</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Promotion Banner</th>
+                                            <th>Name</th>
+                                            <th>Period</th>
+                                            <th>Discount(%)</th>
+                                            <th>Product(s)</th>
+                                            <th>Manage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><div class="banner-placeholder">Banner</div></td>
+                                            <td>Summer Sale</td>
+                                            <td>2025-07-01 12:27:00 To 2025-07-31 12:27:00</td>
+                                            <td>5</td>
+                                            <td>0</td>
+                                            <td><span class="status expired">Expired</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" id="participation-promotion">
+                            <div class="sub-tabs">
+                                <button class="sub-tab active">All(1)</button>
+                                <button class="sub-tab">Coming Soon (0)</button>
+                                <button class="sub-tab">During Promotion (1)</button>
+                                <button class="sub-tab">Finish(0)</button>
+                            </div>
+
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Promotion Banner</th>
+                                            <th>Name</th>
+                                            <th>Period</th>
+                                            <th>Product(s)</th>
+                                            <th>Running Status</th>
+                                            <th>Manage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><div class="banner-placeholder">Banner</div></td>
+                                            <td>Test</td>
+                                            <td>2025-09-18 19:16:00 To 2025-09-30 19:16:00</td>
+                                            <td>1</td>
+                                            <td><span class="status-indicator live">● Live</span></td>
+                                            <td><span class="status joined">Joined</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Page -->
+                <div id="settings-page" class="page">
+                    <div class="page-header">
+                        <h2>Settings</h2>
+                    </div>
+                    <div class="settings-content">
+                        <button class="btn-primary" onclick="showProfileSettings()">Edit Profile Settings</button>
+                    </div>
+                </div>
+
+                <!-- Profile Settings Page -->
+                <div id="profile-settings-page" class="page">
+                    <div class="page-header">
+                        <h2>Edit Profile Information</h2>
+                        <button class="btn-primary">Save Profile</button>
+                    </div>
+
+                    <div class="form-container">
+                        <div class="form-section">
+                            <div class="form-group">
+                                <label>Seller ID</label>
+                                <input type="text" value="Z-JP-37576" class="form-input" readonly>
+                            </div>
+
+                            <!-- Policies Section -->
+                            <div class="policies-section">
+                                <div class="form-group">
+                                    <label>Return Policy</label>
+                                    <div class="editor-container">
+                                        <div class="editor-toolbar">
+                                            <button class="editor-btn"><strong>B</strong></button>
+                                            <button class="editor-btn"><em>I</em></button>
+                                            <button class="editor-btn"><u>U</u></button>
+                                            <button class="editor-btn">≡</button>
+                                            <button class="editor-btn">•</button>
+                                            <button class="editor-btn">🔗</button>
+                                        </div>
+                                        <textarea class="editor-textarea" rows="4" placeholder="Enter return policy..."></textarea>
+                                    </div>
+                                    <div class="editor-footer">POWERED BY TINY</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Shipping Policy</label>
+                                    <div class="editor-container">
+                                        <div class="editor-toolbar">
+                                            <button class="editor-btn"><strong>B</strong></button>
+                                            <button class="editor-btn"><em>I</em></button>
+                                            <button class="editor-btn"><u>U</u></button>
+                                            <button class="editor-btn">≡</button>
+                                            <button class="editor-btn">•</button>
+                                            <button class="editor-btn">🔗</button>
+                                        </div>
+                                        <textarea class="editor-textarea" rows="4" placeholder="Enter shipping policy..."></textarea>
+                                    </div>
+                                    <div class="editor-footer">POWERED BY TINY</div>
+                                </div>
+                            </div>
+
+                            <!-- Business Information -->
+                            <div class="business-section">
+                                <h3>Business Information</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Business Name</label>
+                                        <input type="text" value="Ns-Collection" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Business Registration Number</label>
+                                        <input type="text" value="0000" class="form-input">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Registered Business Address</label>
+                                        <textarea class="form-input" rows="3">25-6 Sasazuka</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        <input type="text" value="Kofu" class="form-input">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Country</label>
+                                        <select class="form-input">
+                                            <option selected>Japan</option>
+                                            <option>USA</option>
+                                            <option>UK</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>State</label>
+                                        <input type="text" value="Yamanashi" class="form-input">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contact Details -->
+                            <div class="contact-section">
+                                <div class="section-header">
+                                    <h3>Contact Details</h3>
+                                    <div class="contact-actions">
+                                        <button class="btn-link">Add More +</button>
+                                        <button class="btn-link text-red">Remove -</button>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" value="Hirohayashi Miho" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Contact</label>
+                                            <input type="text" value="0522224870" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="email" value="hirohayashi@selectbest.jp" class="form-input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bank Details -->
+                            <div class="bank-section">
+                                <h3>Bank Account Details</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Bank Name</label>
+                                        <input type="text" value="mizuho" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Bank Branch</label>
+                                        <input type="text" value="omachi" class="form-input">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="form-actions">
+                                <button class="btn-primary">View Profile</button>
+                                <button class="btn-success">View Collections</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other pages placeholders -->
+                <div id="orders-page" class="page">
+                    <div class="page-header">
+                        <h2>Orders Management</h2>
+                    </div>
+                    <div class="placeholder-content">
+                        <p>Orders page content will be displayed here.</p>
+                    </div>
+                </div>
+
+                <div id="transactions-page" class="page">
+                    <div class="page-header">
+                        <h2>Transactions</h2>
+                    </div>
+                    <div class="placeholder-content">
+                        <p>Transactions page content will be displayed here.</p>
+                    </div>
+                </div>
+
+                <div id="reviews-page" class="page">
+                    <div class="page-header">
+                        <h2>Reviews & Ratings</h2>
+                    </div>
+                    <div class="placeholder-content">
+                        <p>Reviews page content will be displayed here.</p>
+                    </div>
+                </div>
+
+                <div id="support-page" class="page">
+                    <div class="page-header">
+                        <h2>Support</h2>
+                    </div>
+                    <div class="placeholder-content">
+                        <p>Support page content will be displayed here.</p>
+                    </div>
+                </div>
+
+                <div id="selling-fees-page" class="page">
+                    <div class="page-header">
+                        <h2>Selling Fees Calculator</h2>
+                    </div>
+                    <div class="placeholder-content">
+                        <p>Selling fees calculator will be displayed here.</p>
+                    </div>
+                </div>
+
+                <div id="credit-card-page" class="page">
+                    <div class="page-header">
+                        <h2>Credit Card Management</h2>
+                    </div>
+                    <div class="placeholder-content">
+                        <p>Credit card management will be displayed here.</p>
+                    </div>
+                </div>
+
+                <div id="scoring-page" class="page">
+                    <div class="page-header">
+                        <h2>Scoring</h2>
+                    </div>
+                    <div class="placeholder-content">
+                        <p>Scoring interface coming soon...</p>
+                    </div>
+                </div>
+
+                <div id="abandoned-cart-page" class="page">
+                    <div class="page-header">
+                        <h2>Marketplace Abandoned Cart</h2>
+                    </div>
+                    <div class="placeholder-content">
+                        <p>Abandoned cart data will be displayed here.</p>
+                    </div>
+                </div>
+
+                <div id="sales-report-page" class="page">
+                    <div class="page-header">
+                        <h2>Marketplace Advance Report</h2>
+                    </div>
+                    <div class="placeholder-content">
+                        <p>Sales reports will be displayed here.</p>
+                    </div>
+                </div>
+
+                <div id="membership-page" class="page">
+                    <div class="page-header">
+                        <h2>Manage Seller Membership</h2>
+                    </div>
+                    <div class="placeholder-content">
+                        <p>Membership details will be displayed here.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>

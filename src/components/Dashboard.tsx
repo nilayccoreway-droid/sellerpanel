@@ -2,40 +2,103 @@ import React, { useState } from 'react';
 import {
   ShoppingCart,
   Package,
-  CreditCard,
   TrendingUp,
-  Eye,
-  Calendar,
-  MapPin,
   Star,
-  DollarSign,
   ChevronDown,
-  ArrowUpCircle,
-  ArrowDownCircle,
-  Wallet
+  ArrowUp,
+  ArrowDown,
+  Users,
+  DollarSign,
+  BarChart3
 } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
-  const [selectedTimeframe, setSelectedTimeframe] = useState('Last 7 days');
+  const [selectedTimeframe, setSelectedTimeframe] = useState('Last year');
+  const [dateRange, setDateRange] = useState('Jan 1-Dec 31, 2023');
 
-  // Stats data
-  const stats = [
-    { label: 'Orders', value: '16', color: 'bg-orange-500' },
-    { label: 'Products', value: '63', color: 'bg-gray-700' }
+  const salesData = [
+    { month: 'Jan', value: 65 },
+    { month: 'Feb', value: 72 },
+    { month: 'Mar', value: 78 },
+    { month: 'Apr', value: 68 },
+    { month: 'May', value: 85 },
+    { month: 'Jun', value: 95 },
+    { month: 'Jul', value: 88 },
+    { month: 'Aug', value: 92 },
+    { month: 'Sep', value: 87 },
+    { month: 'Oct', value: 90 },
+    { month: 'Nov', value: 98 },
+    { month: 'Dec', value: 85 }
   ];
 
-  // Transaction data
-  const transactions = [
-    { id: 'MRKPL00001', customer: 'Test Customer', amount: '$150.00' },
-    { id: 'MRKPL00002', customer: 'Test Customer', amount: '$89.99' },
-    { id: 'MRKPL00003', customer: 'Test Customer', amount: '$75.50' }
+  const sessionsData = [
+    { month: 'Jan', value: 320 },
+    { month: 'Feb', value: 450 },
+    { month: 'Mar', value: 480 },
+    { month: 'Apr', value: 620 },
+    { month: 'May', value: 580 },
+    { month: 'Jun', value: 720 },
+    { month: 'Jul', value: 850 },
+    { month: 'Aug', value: 920 },
+    { month: 'Sep', value: 1100 },
+    { month: 'Oct', value: 1350 },
+    { month: 'Nov', value: 1550 },
+    { month: 'Dec', value: 1694 }
   ];
 
-  // Activities data
-  const activities = [
-    { time: 'Jun 14', activity: 'New order received' },
-    { time: 'Jun 13', activity: 'Product updated' },
-    { time: 'Jun 12', activity: 'Customer inquiry' }
+  const conversionData = [
+    { month: 'Jan', value: 0.02 },
+    { month: 'Feb', value: 0.03 },
+    { month: 'Mar', value: 0.025 },
+    { month: 'Apr', value: 0.04 },
+    { month: 'May', value: 0.05 },
+    { month: 'Jun', value: 0.045 },
+    { month: 'Jul', value: 0.038 },
+    { month: 'Aug', value: 0.055 },
+    { month: 'Sep', value: 0.048 },
+    { month: 'Oct', value: 0.042 },
+    { month: 'Nov', value: 0.052 },
+    { month: 'Dec', value: 0.06 }
+  ];
+
+  const productSales = [
+    { name: 'Gross sales', value: 'PD 00' },
+    { name: 'Discounts', value: 'PD 00' },
+    { name: 'Returns', value: 'PD 00' },
+    { name: 'Net sales', value: 'PD 00' },
+    { name: 'Balance charges', value: 'PD 00' },
+    { name: 'Return fees', value: 'PD 00' },
+    { name: 'Taxes', value: 'PD 00' },
+    { name: 'Total sales', value: 'PD 00' }
+  ];
+
+  const deviceTypes = [
+    { name: 'Desktop', value: 1.6, percentage: 85, color: '#3B82F6' },
+    { name: 'Mobile', value: 0.3, percentage: 15, color: '#A855F7' }
+  ];
+
+  const locationData = [
+    { location: 'United States - Alpha - Generic Scams', count: 1344 },
+    { location: 'United States - Alpha - None', count: 632 },
+    { location: 'Cayman - Ahmedabad', count: 156 },
+    { location: 'Poland - None', count: 89 },
+    { location: 'India - Maharashtra - Mumbai', count: 67 }
+  ];
+
+  const referrerData = [
+    { source: 'Direct - None - Generic Scams', count: 1344 },
+    { source: 'Direct - None - None', count: 632 }
+  ];
+
+  const landingPages = [
+    { page: 'Homepage /', count: 1256 },
+    { page: 'Home - /products_preview', count: 62 },
+    { page: 'Product - /products/coastal-cabin-assembly', count: 18 },
+    { page: 'Collection - /collection/cabin-assembly', count: 7 },
+    { page: 'Product - /products/coastal-cabin-assembly-copy', count: 3 },
+    { page: 'Product - /products/home-coastal-main-single-cone-far-right-cabin', count: 2 },
+    { page: 'Product - /products/home-main-single-cone-far-right-cabin', count: 2 },
+    { page: 'Collection - /collection/cabin-assembly', count: 2 }
   ];
 
   // Latest Orders data
@@ -245,189 +308,534 @@ const Dashboard: React.FC = () => {
     }
   ];
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Completed': return 'bg-green-100 text-green-800';
-      case 'Processing': return 'bg-yellow-100 text-yellow-800';
-      case 'Shipped': return 'bg-blue-100 text-blue-800';
-      case 'Open': return 'bg-green-100 text-green-800';
-      case 'Approved': return 'bg-green-100 text-green-800';
-      case 'completed': return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
+  const LineChart = ({ data, height = 120, color = '#3B82F6' }: { data: any[], height?: number, color?: string }) => {
+    const max = Math.max(...data.map(d => d.value));
+    const points = data.map((d, i) => {
+      const x = (i / (data.length - 1)) * 100;
+      const y = height - (d.value / max) * height;
+      return `${x},${y}`;
+    }).join(' ');
+
+    return (
+      <svg width="100%" height={height} className="overflow-visible">
+        <polyline
+          fill="none"
+          stroke={color}
+          strokeWidth="2"
+          points={points}
+          vectorEffect="non-scaling-stroke"
+        />
+        {data.map((d, i) => {
+          const x = (i / (data.length - 1)) * 100;
+          const y = height - (d.value / max) * height;
+          return (
+            <circle
+              key={i}
+              cx={`${x}%`}
+              cy={y}
+              r="3"
+              fill={color}
+            />
+          );
+        })}
+      </svg>
+    );
   };
 
-  const renderStars = (rating: number) => {
+  const BarChart = ({ data, height = 140 }: { data: any[], height?: number }) => {
+    const max = Math.max(...data.map(d => d.value));
+    const barWidth = 100 / data.length;
+
     return (
-      <div className="flex">
-        {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            size={14}
-            className={i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}
-          />
-        ))}
+      <svg width="100%" height={height}>
+        {data.map((d, i) => {
+          const barHeight = (d.value / max) * height * 0.8;
+          const x = i * barWidth;
+          const y = height - barHeight;
+          return (
+            <rect
+              key={i}
+              x={`${x}%`}
+              y={y}
+              width={`${barWidth * 0.8}%`}
+              height={barHeight}
+              fill="#3B82F6"
+              rx="2"
+            />
+          );
+        })}
+      </svg>
+    );
+  };
+
+  const DonutChart = ({ data }: { data: any[] }) => {
+    const total = data.reduce((sum, d) => sum + d.percentage, 0);
+    let currentAngle = -90;
+
+    return (
+      <div className="relative w-48 h-48 mx-auto">
+        <svg width="192" height="192" viewBox="0 0 192 192">
+          {data.map((item, index) => {
+            const angle = (item.percentage / total) * 360;
+            const startAngle = currentAngle;
+            const endAngle = currentAngle + angle;
+            currentAngle = endAngle;
+
+            const startRad = (startAngle * Math.PI) / 180;
+            const endRad = (endAngle * Math.PI) / 180;
+
+            const x1 = 96 + 70 * Math.cos(startRad);
+            const y1 = 96 + 70 * Math.sin(startRad);
+            const x2 = 96 + 70 * Math.cos(endRad);
+            const y2 = 96 + 70 * Math.sin(endRad);
+
+            const largeArcFlag = angle > 180 ? 1 : 0;
+
+            const pathData = [
+              `M 96 96`,
+              `L ${x1} ${y1}`,
+              `A 70 70 0 ${largeArcFlag} 1 ${x2} ${y2}`,
+              'Z'
+            ].join(' ');
+
+            return (
+              <path
+                key={index}
+                d={pathData}
+                fill={item.color}
+              />
+            );
+          })}
+          <circle cx="96" cy="96" r="45" fill="white" />
+        </svg>
+        <div className="absolute inset-0 flex items-center justify-center flex-col">
+          <div className="text-3xl font-bold text-gray-900">1.7K</div>
+        </div>
       </div>
     );
   };
 
   return (
-    <div className="space-y-6">
-      {/* Top Row - Stats, Lifetime Sales, Map, Transactions, Activities */}
-      <div className="grid grid-cols-12 gap-6">
-        {/* Stats */}
-        <div className="col-span-2 space-y-4">
-          {stats.map((stat, index) => (
-            <div key={index} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-600 text-sm font-medium">{stat.label}</p>
-                  <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-                </div>
-                <div className={`w-8 h-8 ${stat.color} rounded`}></div>
-              </div>
-            </div>
-          ))}
+    <div className="space-y-4">
+      {/* Header Controls */}
+      <div className="flex items-center justify-between bg-white px-6 py-4 rounded-lg shadow-sm border border-gray-200">
+        <div className="flex items-center space-x-4">
+          <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+            {selectedTimeframe}
+          </button>
+          <div className="flex items-center space-x-2 text-sm text-gray-600">
+            <span>{dateRange}</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <span className="text-sm text-gray-600">EZ MKT F</span>
+          </div>
         </div>
+        <button className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-md hover:bg-gray-800">
+          New dashboard
+        </button>
+      </div>
 
-        {/* Lifetime Sales */}
-        <div className="col-span-3 bg-slate-700 text-white rounded-lg p-4 shadow-sm">
-          <h3 className="text-sm font-medium mb-2">Lifetime Sales</h3>
-          <p className="text-2xl font-bold">₹ 320.29K</p>
-          <div className="mt-4 h-32 bg-slate-600 rounded flex items-center justify-center">
-            <div className="text-center">
-              <MapPin size={32} className="text-slate-300 mx-auto mb-2" />
-              <p className="text-xs text-slate-300">Sales visualization</p>
-            </div>
+      {/* Top Metrics Row */}
+      <div className="grid grid-cols-4 gap-4">
+        {/* Gross Sales */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-sm font-medium text-gray-600">Gross sales</h3>
+            <ChevronDown size={16} className="text-gray-400" />
+          </div>
+          <div className="flex items-baseline space-x-2">
+            <span className="text-3xl font-bold text-gray-900">PD</span>
+            <span className="text-sm text-gray-500">PD</span>
           </div>
         </div>
 
-        {/* Map */}
-        <div className="col-span-4 bg-white rounded-lg p-4 shadow-sm border border-gray-200">
-          <div className="h-48 bg-gray-50 rounded flex items-center justify-center relative">
-            <div className="absolute inset-0 bg-green-50 rounded">
-              <div className="flex items-center justify-center h-full">
-                <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
-              </div>
-            </div>
-            <div className="absolute bottom-2 left-2 text-xs text-gray-700 bg-white px-2 py-1 rounded shadow-sm">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span>₹85,156 ₹ 85,156.4</span>
-              </div>
-            </div>
+        {/* Returning Customer Rate */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-sm font-medium text-gray-600">Returning customer rate</h3>
+            <ChevronDown size={16} className="text-gray-400" />
+          </div>
+          <div className="flex items-baseline space-x-2">
+            <span className="text-3xl font-bold text-gray-900">0%</span>
           </div>
         </div>
 
-        {/* Transactions & Activities */}
-        <div className="col-span-3 space-y-4">
-          {/* Transactions */}
-          <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
-            <h3 className="text-sm font-medium text-gray-900 mb-4">Transaction</h3>
+        {/* Orders Fulfilled */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-sm font-medium text-gray-600">Orders fulfilled</h3>
+            <ChevronDown size={16} className="text-gray-400" />
+          </div>
+          <div className="flex items-baseline space-x-2">
+            <span className="text-3xl font-bold text-gray-900">9</span>
+            <span className="text-sm text-blue-600 flex items-center">
+              <TrendingUp size={14} className="mr-1" />
+            </span>
+          </div>
+        </div>
 
-            {/* Financial Summary Cards */}
-            <div className="grid grid-cols-3 gap-3 mb-4">
-              {/* Total Earned */}
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-3 border border-green-200">
-                <div className="flex items-center justify-between mb-2">
-                  <ArrowUpCircle size={20} className="text-green-600" />
-                  <span className="text-xs font-medium text-green-700">Earned</span>
-                </div>
-                <p className="text-lg font-bold text-green-900">$315.49</p>
-              </div>
+        {/* Orders */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-sm font-medium text-gray-600">Orders</h3>
+            <ChevronDown size={16} className="text-gray-400" />
+          </div>
+          <div className="flex items-baseline space-x-2">
+            <span className="text-3xl font-bold text-gray-900">{latestOrders.length}</span>
+            <span className="text-sm text-blue-600 flex items-center">
+              <TrendingUp size={14} className="mr-1" />
+            </span>
+          </div>
+        </div>
+      </div>
 
-              {/* Total Withdrawn */}
-              <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-lg p-3 border border-red-200">
-                <div className="flex items-center justify-between mb-2">
-                  <ArrowDownCircle size={20} className="text-red-600" />
-                  <span className="text-xs font-medium text-red-700">Withdrawn</span>
-                </div>
-                <p className="text-lg font-bold text-red-900">$0.00</p>
-              </div>
-
-              {/* Balance */}
-              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-3 border border-blue-200">
-                <div className="flex items-center justify-between mb-2">
-                  <Wallet size={20} className="text-blue-600" />
-                  <span className="text-xs font-medium text-blue-700">Balance</span>
-                </div>
-                <p className="text-lg font-bold text-blue-900">$315.49</p>
+      {/* Charts Row */}
+      <div className="grid grid-cols-3 gap-4">
+        {/* Total Sales Over Time */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="text-sm font-medium text-gray-900">Total sales over time</h3>
+              <div className="flex items-baseline space-x-2 mt-2">
+                <span className="text-2xl font-bold text-gray-900">PD</span>
+                <span className="text-sm text-gray-500">PD</span>
               </div>
             </div>
+          </div>
+          <div className="mt-4">
+            <LineChart data={salesData} height={120} color="#3B82F6" />
+          </div>
+          <div className="flex justify-between items-center mt-4 text-xs text-gray-500">
+            {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'].map((month, i) => (
+              <span key={i}>{month}</span>
+            ))}
+          </div>
+        </div>
 
-            {/* Transaction List */}
-            <div className="space-y-2">
-              {transactions.map((transaction, index) => (
-                <div key={index} className="flex justify-between items-center text-sm py-1">
-                  <span className="text-gray-600">{transaction.id}</span>
-                  <span className="font-medium text-gray-900">{transaction.amount}</span>
+        {/* Average Order Value */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="text-sm font-medium text-gray-900">Average order value over time</h3>
+              <div className="flex items-baseline space-x-2 mt-2">
+                <span className="text-2xl font-bold text-gray-900">PD</span>
+                <span className="text-sm text-gray-500">PD</span>
+              </div>
+            </div>
+          </div>
+          <div className="mt-4">
+            <LineChart data={salesData} height={120} color="#10B981" />
+          </div>
+          <div className="flex justify-between items-center mt-4 text-xs text-gray-500">
+            {['Jan', 'May', 'Sep', 'Nov'].map((month, i) => (
+              <span key={i}>{month}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* Total Sales Breakdown */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-4">Total sales breakdown</h3>
+          <div className="space-y-3">
+            {productSales.map((item, index) => (
+              <div key={index} className="flex justify-between items-center">
+                <span className="text-sm text-blue-600">{item.name}</span>
+                <span className="text-sm font-medium text-gray-900">{item.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Middle Charts Row */}
+      <div className="grid grid-cols-3 gap-4">
+        {/* Sales by Channel */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-4">Total sales by sales channel</h3>
+          <div className="h-32 flex items-center justify-center text-sm text-gray-500">
+            No data for this date range
+          </div>
+        </div>
+
+        {/* Sales by Product */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-4">Total sales by product</h3>
+          <div className="h-32 flex items-center justify-center text-sm text-gray-500">
+            No data for this date range
+          </div>
+        </div>
+
+        {/* Sales by Social Referrer */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-4">Total sales by social referrer</h3>
+          <div className="h-32 flex items-center justify-center text-sm text-gray-500">
+            No data for this date range
+          </div>
+        </div>
+      </div>
+
+      {/* Sessions and Conversion Row */}
+      <div className="grid grid-cols-3 gap-4">
+        {/* Sessions Over Time */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <div className="mb-4">
+            <h3 className="text-sm font-medium text-gray-900">Sessions over time</h3>
+            <div className="flex items-baseline space-x-2 mt-2">
+              <span className="text-2xl font-bold text-gray-900">{sessionsData[sessionsData.length - 1].value}</span>
+              <span className="text-sm text-gray-500">800</span>
+            </div>
+          </div>
+          <div className="mt-4">
+            <LineChart data={sessionsData} height={120} color="#06B6D4" />
+          </div>
+          <div className="flex justify-between items-center mt-4 text-xs text-gray-500">
+            {['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov'].map((month, i) => (
+              <span key={i}>{month}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* Conversion Rate */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <div className="mb-4">
+            <h3 className="text-sm font-medium text-gray-900">Conversion rate over time</h3>
+            <div className="flex items-baseline space-x-2 mt-2">
+              <span className="text-2xl font-bold text-gray-900">0.06%</span>
+              <span className="text-sm text-gray-500">0.3%</span>
+            </div>
+          </div>
+          <div className="mt-4">
+            <LineChart data={conversionData} height={120} color="#8B5CF6" />
+          </div>
+          <div className="flex justify-between items-center mt-4 text-xs text-gray-500">
+            {['Jan', 'May', 'Sep', 'Nov'].map((month, i) => (
+              <span key={i}>{month}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* Conversion Breakdown */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-4">Conversion rate breakdown</h3>
+          <div className="mb-4">
+            <div className="flex items-baseline space-x-2">
+              <span className="text-2xl font-bold text-gray-900">0.06%</span>
+            </div>
+          </div>
+          <div className="space-y-3">
+            {[
+              { label: 'Sessions', value: '100%', subValue: '0.41%', change: '74.7%' },
+              { label: 'Added to cart', value: '0.41%', subValue: '0.53%', change: '9.9%' },
+              { label: 'Reached checkout', value: '0.53%', subValue: '0.06%', change: '0.6%' },
+              { label: 'Completed', value: '0.06%', subValue: '', change: '' }
+            ].map((item, index) => (
+              <div key={index} className="flex justify-between items-center">
+                <div className="flex-1">
+                  <div className="text-sm text-gray-900">{item.label}</div>
+                  <div className="text-xs text-gray-500">{item.value}</div>
                 </div>
+                {item.subValue && (
+                  <div className="text-right">
+                    <div className="text-sm font-medium text-gray-900">{item.subValue}</div>
+                    <div className="text-xs text-gray-500">{item.change}</div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="mt-4">
+            <BarChart data={[{ value: 100 }, { value: 42 }, { value: 25 }, { value: 15 }]} height={80} />
+          </div>
+        </div>
+      </div>
+
+      {/* Device Types and Location Row */}
+      <div className="grid grid-cols-3 gap-4">
+        {/* Sessions by Device */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-4">Sessions by device type</h3>
+          <DonutChart data={deviceTypes} />
+          <div className="mt-4 space-y-2">
+            {deviceTypes.map((device, index) => (
+              <div key={index} className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: device.color }}></div>
+                  <span className="text-sm text-gray-700">{device.name}</span>
+                </div>
+                <span className="text-sm font-medium text-gray-900">{device.value}K</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Sessions by Location */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-4">Sessions by location</h3>
+          <div className="space-y-2">
+            {locationData.map((item, index) => (
+              <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
+                <div className="flex-1">
+                  <div className="text-sm text-gray-900 truncate">{item.location}</div>
+                </div>
+                <div className="ml-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-24 h-2 bg-gray-100 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-blue-500 rounded-full"
+                        style={{ width: `${(item.count / locationData[0].count) * 100}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm font-medium text-gray-900 w-12 text-right">{item.count}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Sessions by Landing Page */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-4">Sessions by landing page</h3>
+          <div className="space-y-2">
+            {landingPages.slice(0, 7).map((item, index) => (
+              <div key={index} className="flex items-center justify-between py-1.5">
+                <div className="flex-1 truncate">
+                  <span className="text-sm text-gray-900">{item.page}</span>
+                </div>
+                <span className="text-sm font-medium text-gray-900 ml-4">{item.count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Row - Referrers and More */}
+      <div className="grid grid-cols-3 gap-4">
+        {/* Sessions by Referrer */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-4">Sessions by referrer</h3>
+          <div className="space-y-3">
+            {referrerData.map((item, index) => (
+              <div key={index} className="flex items-center justify-between">
+                <div className="flex-1">
+                  <div className="text-sm text-gray-900 truncate">{item.source}</div>
+                </div>
+                <div className="ml-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-32 h-2 bg-gray-100 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-cyan-500 rounded-full"
+                        style={{ width: `${(item.count / referrerData[0].count) * 100}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm font-medium text-gray-900">{item.count}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 h-32 flex items-center justify-center text-sm text-gray-500">
+            Additional data visualization
+          </div>
+        </div>
+
+        {/* Sales Referrer */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-4">Total sales by referrer</h3>
+          <div className="h-40 flex items-center justify-center text-sm text-gray-500">
+            No data for this date range
+          </div>
+        </div>
+
+        {/* Sales Attribution */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-4">Sales attributed for marketing</h3>
+          <div className="h-40 flex items-center justify-center text-sm text-gray-500">
+            No data for this date range
+          </div>
+        </div>
+      </div>
+
+      {/* Customer Cohort Analysis */}
+      <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+        <h3 className="text-sm font-medium text-gray-900 mb-4">Customer cohort analysis</h3>
+        <div className="overflow-x-auto">
+          <table className="min-w-full">
+            <thead>
+              <tr className="border-b border-gray-200">
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Cohort</th>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Customers</th>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Retention r...</th>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 0</th>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 1</th>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 2</th>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 3</th>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 4</th>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 5</th>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 6</th>
+              </tr>
+            </thead>
+            <tbody>
+              {['All cohorts', 'Nov 2024', 'Dec 2024', 'Jan 2025', 'Feb 2025', 'Mar 2025', 'May 2025'].map((cohort, index) => (
+                <tr key={index} className="border-b border-gray-100">
+                  <td className="px-3 py-2 text-sm text-gray-900">{cohort}</td>
+                  <td className="px-3 py-2 text-sm text-gray-900">0</td>
+                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
+                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
+                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
+                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
+                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
+                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
+                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
+                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
+                </tr>
               ))}
-            </div>
-          </div>
-
-          {/* Activities */}
-          <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
-            <h3 className="text-sm font-medium text-gray-900 mb-3">Activities</h3>
-            <div className="space-y-2">
-              {activities.map((activity, index) => (
-                <div key={index} className="text-sm">
-                  <div className="text-gray-500">{activity.time}</div>
-                  <div className="text-gray-700">{activity.activity}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+            </tbody>
+          </table>
         </div>
       </div>
 
       {/* Latest Orders */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-          <h3 className="text-lg font-semibold text-gray-900">Latest Orders</h3>
-          <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-            View All Orders
+        <div className="p-6 border-b border-gray-200 flex justify-between items-center">
+          <h3 className="text-base font-semibold text-gray-900">Latest Orders</h3>
+          <button className="text-sm text-blue-600 hover:text-blue-800 font-medium">
+            View All
           </button>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead style={{ backgroundColor: '#00666B' }}>
+            <thead className="bg-gray-50">
               <tr>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Order</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Date/Time</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Products</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Base Total</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Purchase Total</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Tax</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Status</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>View</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Order ID</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Date</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Customer</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Products</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Total</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Status</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {latestOrders.map((order) => (
-                <tr key={order.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900">{order.id}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{order.date}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    <div className="space-y-1">
-                      {order.products.slice(0, 2).map((product, idx) => (
-                        <div key={idx}>{product}</div>
-                      ))}
-                      {order.products.length > 2 && (
-                        <div className="text-gray-400">+{order.products.length - 2} more</div>
-                      )}
+              {latestOrders.slice(0, 5).map((order) => (
+                <tr key={order.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">#{order.id}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">{order.date}</td>
+                  <td className="px-6 py-4 text-sm text-gray-900">{order.customer}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">
+                    <div className="max-w-xs truncate">
+                      {order.products[0]}
+                      {order.products.length > 1 && ` +${order.products.length - 1} more`}
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900">{order.baseTotal}</td>
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900">{order.purchaseTotal}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{order.tax}</td>
-                  <td className="px-4 py-3">
-                    <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
+                  <td className="px-6 py-4 text-sm font-semibold text-gray-900">{order.purchaseTotal}</td>
+                  <td className="px-6 py-4">
+                    <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${
+                      order.status === 'Completed'
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-yellow-100 text-yellow-700'
+                    }`}>
                       {order.status}
                     </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <button className="text-blue-600 hover:text-blue-800 text-sm">View</button>
                   </td>
                 </tr>
               ))}
@@ -436,211 +844,44 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Recently Added Products */}
+      {/* Top Products */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-          <h3 className="text-lg font-semibold text-gray-900">Recently Added Products</h3>
+        <div className="p-6 border-b border-gray-200 flex justify-between items-center">
+          <h3 className="text-base font-semibold text-gray-900">Top Products</h3>
+          <button className="text-sm text-blue-600 hover:text-blue-800 font-medium">
+            View All
+          </button>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead style={{ backgroundColor: '#00666B' }}>
+            <thead className="bg-gray-50">
               <tr>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Product Name</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Price</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Status</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Type</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>SKU</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Created At</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Visibility</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Product</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">SKU</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Price</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Orders</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Revenue</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Rating</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {recentProducts.map((product) => (
-                <tr key={product.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 text-sm text-gray-900">{product.name}</td>
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900">{product.price}</td>
-                  <td className="px-4 py-3">
-                    <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(product.status)}`}>
-                      {product.status}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{product.type}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{product.sku}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{product.createdAt}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{product.quantity}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Latest Seller Tickets */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-          <h3 className="text-lg font-semibold text-gray-900">Latest Seller Tickets</h3>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full">
-            <thead style={{ backgroundColor: '#00666B' }}>
-              <tr>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Ticket Id</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Message</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Department</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Agent Name</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Status</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Priority</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Action</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {sellerTickets.map((ticket) => (
-                <tr key={ticket.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900">{ticket.id}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900">{ticket.message}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900">{ticket.department}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900">{ticket.agentName}</td>
-                  <td className="px-4 py-3">
-                    <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(ticket.status)}`}>
-                      {ticket.status}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-900">{ticket.priority}</td>
-                  <td className="px-4 py-3">
-                    <button className="text-blue-600 hover:text-blue-800 text-sm">Reply</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Recently Transaction */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-          <h3 className="text-lg font-semibold text-gray-900">Recently Transaction</h3>
-          <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-            View All Transaction
-          </button>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full">
-            <thead style={{ backgroundColor: '#00666B' }}>
-              <tr>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Transaction Type</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Income Amount</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Expense Amount</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Net Amount</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Status</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Created Date</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {recentTransactions.map((transaction, index) => (
-                <tr key={index} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 text-sm text-gray-900">{transaction.type}</td>
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900">{transaction.incomeAmount}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900">{transaction.expenseAmount}</td>
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900">{transaction.netAmount}</td>
-                  <td className="px-4 py-3">
-                    <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(transaction.status)}`}>
-                      {transaction.status}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{transaction.createdDate}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Recently Product Review */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-          <h3 className="text-lg font-semibold text-gray-900">Recently Product Review</h3>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full">
-            <thead style={{ backgroundColor: '#00666B' }}>
-              <tr>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Customer Name</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Product Sku</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Review Title</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Review Text</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Rating Summary for client</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {productReviews.map((review) => (
-                <tr key={review.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 text-sm text-gray-900">{review.customer}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900">{review.productSku}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900">{review.product}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600 max-w-xs truncate">{review.reviewText}</td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center space-x-2">
-                      {renderStars(review.rating)}
-                      <span className="text-sm text-gray-600">{review.reviewSummary}</span>
+                <tr key={product.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">{product.name}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">{product.sku}</td>
+                  <td className="px-6 py-4 text-sm text-gray-900">{product.price}</td>
+                  <td className="px-6 py-4 text-sm text-gray-900">8</td>
+                  <td className="px-6 py-4 text-sm font-semibold text-gray-900">$127.92</td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center space-x-1">
+                      <Star size={14} className="text-yellow-400 fill-current" />
+                      <span className="text-sm text-gray-900">5.0</span>
                     </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
-      </div>
-
-      {/* Shipping Order */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-          <h3 className="text-lg font-semibold text-gray-900">Shipping Order</h3>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full">
-            <thead style={{ backgroundColor: '#00666B' }}>
-              <tr>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>#</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Order</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Shipment</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Date/Time</th>
-                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Products</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {shippingOrders.map((order, index) => (
-                <tr key={order.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 text-sm text-gray-900">{index + 1}</td>
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900">{order.id}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900">{order.shipment}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{order.date}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    <div className="space-y-1">
-                      {order.products.slice(0, 2).map((product, idx) => (
-                        <div key={idx}>{product}</div>
-                      ))}
-                      {order.products.length > 2 && (
-                        <div className="text-gray-400">+{order.products.length - 2} more</div>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Order Shipping Pickup */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="p-4 border-b border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900">Order Shipping Pickup</h3>
-        </div>
-        <div className="p-4">
-          <div className="text-center text-gray-500">
-            <p>No scheduled pickup records</p>
-          </div>
         </div>
       </div>
     </div>

@@ -42,7 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   ];
 
   return (
-    <div className="w-64 bg-gray-900 text-white min-h-screen fixed flex flex-col overflow-hidden">
+    <div className="w-64 bg-[#00666B] text-white min-h-screen fixed flex flex-col overflow-hidden">
       {/* Logo */}
       <div className="px-4 py-4 border-b border-gray-800 flex-shrink-0">
         <h1 className="text-lg font-bold">Marketplace</h1>
@@ -58,9 +58,9 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
               <li key={item.id}>
                 <button
                   onClick={() => onTabChange(item.id)}
-                  className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gray-800 text-sm ${
+                  className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-all duration-200 hover:bg-[#005257] text-sm ${
                     activeTab === item.id
-                      ? 'bg-blue-600 text-white shadow-lg'
+                      ? 'bg-[#008b91] text-white shadow-lg'
                       : 'text-gray-300 hover:text-white'
                   }`}
                 >

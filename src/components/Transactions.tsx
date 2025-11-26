@@ -96,7 +96,7 @@ const Transactions: React.FC = () => {
       {/* Table */}
       <div className="overflow-x-auto">
         <table className="min-w-full">
-          <thead className="bg-gray-800 text-white">
+          <thead className="bg-[#00666B] text-white">
             <tr>
               <th className="px-6 py-4 text-left text-sm font-medium">Transaction Type</th>
               <th className="px-6 py-4 text-left text-sm font-medium">Income Amount</th>
@@ -139,14 +139,10 @@ const Transactions: React.FC = () => {
       <h2 className="text-xl font-semibold text-gray-900 mb-2">Export Transactions</h2>
       <p className="text-gray-600 mb-6">Download your transaction data in various formats</p>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
         <button className="p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
           <div className="text-lg font-medium text-gray-900 mb-1">CSV Export</div>
           <div className="text-sm text-gray-600">Spreadsheet compatible</div>
-        </button>
-        <button className="p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-          <div className="text-lg font-medium text-gray-900 mb-1">PDF Report</div>
-          <div className="text-sm text-gray-600">Formatted report</div>
         </button>
         <button className="p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
           <div className="text-lg font-medium text-gray-900 mb-1">Excel Export</div>

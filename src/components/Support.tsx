@@ -282,7 +282,7 @@ const Support: React.FC = () => {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
+              className="px-6 py-3 bg-[#00666B] text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
             >
               Submit Ticket
             </button>
@@ -301,7 +301,7 @@ const Support: React.FC = () => {
         </div>
         <button
           onClick={() => setActiveView('create')}
-          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="inline-flex items-center px-4 py-2 bg-[#00666B] text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
           <Plus size={16} className="mr-2" />
           Create Ticket
@@ -353,7 +353,7 @@ const Support: React.FC = () => {
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-gray-800 text-white">
+            <thead className="bg-[#00666B] text-white">
               <tr>
                 <th className="px-6 py-4 text-left text-sm font-medium">
                   <input type="checkbox" className="rounded" />
@@ -498,7 +498,7 @@ const Support: React.FC = () => {
                 
                 <button
                   type="button"
-                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                  className="px-6 py-2 bg-[#00666B] text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
                 >
                   Send
                 </button>

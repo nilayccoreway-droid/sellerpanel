@@ -1211,7 +1211,7 @@ Remember, building a successful online business takes time and consistency. Focu
               >
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Icon size={24} className="text-blue-600" />
+                    <Icon size={24} className="text-[#00666B]" />
                   </div>
                   <div className="flex-1">
                     <h3 className="font-semibold text-gray-900 mb-2">{category.title}</h3>
@@ -1238,10 +1238,6 @@ Remember, building a successful online business takes time and consistency. Focu
               Can't find what you're looking for? Our support team is here to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                <MessageCircle size={20} className="mr-2" />
-                Live Chat
-              </button>
               <button className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
                 <Mail size={20} className="mr-2" />
                 Email Support
@@ -1260,7 +1256,7 @@ Remember, building a successful online business takes time and consistency. Focu
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-8 text-white">
+      <div className="bg-[#00666B] rounded-xl p-8 text-white">
         <h1 className="text-3xl font-bold mb-2">Help & Support</h1>
         <p className="text-blue-100">Find answers to your questions and get help with your seller account</p>
       </div>

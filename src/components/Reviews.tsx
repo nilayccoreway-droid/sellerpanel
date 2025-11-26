@@ -112,7 +112,7 @@ const Reviews: React.FC = () => {
       {/* Table */}
       <div className="overflow-x-auto">
         <table className="min-w-full">
-          <thead className="bg-gray-800 text-white">
+          <thead className="bg-[#00666B] text-white">
             <tr>
               <th className="px-6 py-4 text-left text-sm font-medium">ID</th>
               <th className="px-6 py-4 text-left text-sm font-medium">Price Rating(in star)</th>

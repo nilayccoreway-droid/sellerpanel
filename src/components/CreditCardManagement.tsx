@@ -64,15 +64,9 @@ const CreditCardManagement: React.FC = () => {
           <div className="flex space-x-3">
             <button
               onClick={handleSave}
-              className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors font-medium"
+              className="px-6 py-2 bg-[#00666B] text-white rounded-lg hover:bg-gray-700 transition-colors font-medium"
             >
               Save Card Data
-            </button>
-            <button
-              onClick={handleReset}
-              className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
-            >
-              Reset
             </button>
           </div>
         </div>
@@ -189,7 +183,7 @@ const CreditCardManagement: React.FC = () => {
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-gray-800 text-white">
+            <thead className="bg-[#00666B] text-white">
               <tr>
                 <th className="px-6 py-4 text-left text-sm font-medium">
                   <input type="checkbox" className="rounded" />

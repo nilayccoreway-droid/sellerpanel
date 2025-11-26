@@ -46,7 +46,7 @@ const SalesReport: React.FC = () => {
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Marketplace Advance Report</h2>
         </div>
-        <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+        <button className="inline-flex items-center px-4 py-2 bg-[#00666B] text-white rounded-lg hover:bg-blue-700 transition-colors">
           <Download size={16} className="mr-2" />
           Export Report
         </button>
@@ -137,7 +137,7 @@ const SalesReport: React.FC = () => {
             />
           </div>
           <div className="flex items-end">
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+            <button className="bg-[#00666B] text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
               Filter Result
             </button>
           </div>
@@ -146,7 +146,7 @@ const SalesReport: React.FC = () => {
         {/* Sales Data Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-gray-800 text-white">
+            <thead className="bg-[#00666B] text-white">
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-medium">Date</th>
                 <th className="px-4 py-3 text-left text-sm font-medium">Total Orders</th>
@@ -260,7 +260,7 @@ const SalesReport: React.FC = () => {
         
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-gray-800 text-white">
+            <thead className="bg-[#00666B] text-white">
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-medium">Id</th>
                 <th className="px-4 py-3 text-left text-sm font-medium">Customer</th>

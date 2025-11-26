@@ -73,7 +73,7 @@ const ProfileSettings: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-gray-900">Edit Profile Information</h2>
-        <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+        <button className="px-6 py-2 bg-[#00666B] text-white rounded-lg hover:bg-blue-700">
           Save Profile
         </button>
       </div>
@@ -457,75 +457,10 @@ const ProfileSettings: React.FC = () => {
           </div>
 
           {/* Social Media */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900">Social Media Links</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Twitter ID</label>
-                <input
-                  type="text"
-                  value={profileData.twitterId}
-                  onChange={(e) => handleInputChange('twitterId', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Facebook ID</label>
-                <input
-                  type="text"
-                  value={profileData.facebookId}
-                  onChange={(e) => handleInputChange('facebookId', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Instagram ID</label>
-                <input
-                  type="text"
-                  value={profileData.instagramId}
-                  onChange={(e) => handleInputChange('instagramId', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">YouTube ID</label>
-                <input
-                  type="text"
-                  value={profileData.youtubeId}
-                  onChange={(e) => handleInputChange('youtubeId', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Vimeo ID</label>
-                <input
-                  type="text"
-                  value={profileData.vimeoId}
-                  onChange={(e) => handleInputChange('vimeoId', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Pinterest ID</label>
-                <input
-                  type="text"
-                  value={profileData.pinterestId}
-                  onChange={(e) => handleInputChange('pinterestId', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-            </div>
-          </div>
+          
 
           {/* Action Buttons */}
-          <div className="flex justify-center space-x-4 pt-6">
-            <button className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">
-              View Profile
-            </button>
-            <button className="px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium">
-              View Collections
-            </button>
-          </div>
+
         </div>
       </div>
     </div>

@@ -207,7 +207,7 @@ const Products: React.FC<ProductsProps> = ({ onEditProduct }) => {
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-gray-800 text-white">
+            <thead className="bg-[#00666B] text-white">
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-medium">
                   <input type="checkbox" className="rounded" />

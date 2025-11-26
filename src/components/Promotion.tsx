@@ -291,7 +291,7 @@ const Promotion: React.FC = () => {
           {/* Table */}
           <div className="overflow-x-auto">
             <table className="min-w-full">
-              <thead className="bg-gray-800 text-white">
+              <thead className="bg-[#00666B] text-white">
                 <tr>
                   <th className="px-6 py-4 text-left text-sm font-medium">Promotion Banner</th>
                   <th className="px-6 py-4 text-left text-sm font-medium">Name</th>
@@ -473,7 +473,7 @@ const Promotion: React.FC = () => {
 
                 <div className="overflow-x-auto">
                   <table className="min-w-full">
-                    <thead className="bg-gray-800 text-white">
+                    <thead className="bg-[#00666B] text-white">
                       <tr>
                         <th className="px-6 py-4 text-left text-sm font-medium">
                           <input type="checkbox" className="rounded" />
@@ -550,7 +550,7 @@ const Promotion: React.FC = () => {
 
                 <div className="overflow-x-auto">
                   <table className="min-w-full">
-                    <thead className="bg-gray-800 text-white">
+                    <thead className="bg-[#00666B] text-white">
                       <tr>
                         <th className="px-6 py-4 text-left text-sm font-medium">
                           <input type="checkbox" className="rounded" />

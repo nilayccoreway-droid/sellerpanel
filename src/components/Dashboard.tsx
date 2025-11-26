@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { 
-  ShoppingCart, 
-  Package, 
-  CreditCard, 
-  TrendingUp, 
-  Eye, 
+import {
+  ShoppingCart,
+  Package,
+  CreditCard,
+  TrendingUp,
+  Eye,
   Calendar,
   MapPin,
   Star,
   DollarSign,
-  ChevronDown
+  ChevronDown,
+  ArrowUpCircle,
+  ArrowDownCircle,
+  Wallet
 } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
@@ -74,46 +77,6 @@ const Dashboard: React.FC = () => {
       products: ['Cheesecake Slice Red Velvet Cake 80 g/2.82 oz', 'Cheesecake Slice Red Velvet Cake', 'Bracelet 1', 'Bracelet 2'],
       baseTotal: '$85.00',
       purchaseTotal: '$95.00',
-      tax: 'test tax',
-      status: 'Processing'
-    },
-    {
-      id: '100000005',
-      date: 'May 14, 2024 4:10 PM',
-      customer: 'Alice Brown',
-      products: ['Ring - Accessories', 'Bag - Women Product', 'Bracelet 1', 'Bracelet 2'],
-      baseTotal: '$75.00',
-      purchaseTotal: '$85.00',
-      tax: 'test tax',
-      status: 'Completed'
-    },
-    {
-      id: '100000006',
-      date: 'May 13, 2024 3:30 PM',
-      customer: 'Bob Wilson',
-      products: ['Ring - Accessories', 'Bag - Women Product', 'Bracelet 1', 'Bracelet 2'],
-      baseTotal: '$90.00',
-      purchaseTotal: '$100.00',
-      tax: 'test tax',
-      status: 'Completed'
-    },
-    {
-      id: '100000007',
-      date: 'May 12, 2024 2:45 PM',
-      customer: 'Carol Davis',
-      products: ['Ring - Accessories', 'Bag - Women Product', 'Bracelet 1', 'Bracelet 2'],
-      baseTotal: '$65.00',
-      purchaseTotal: '$75.00',
-      tax: 'test tax',
-      status: 'Completed'
-    },
-    {
-      id: '100000008',
-      date: 'May 11, 2024 1:20 PM',
-      customer: 'David Miller',
-      products: ['Ring - Accessories', 'Bag - Women Product', 'Bracelet 1', 'Bracelet 2'],
-      baseTotal: '$110.00',
-      purchaseTotal: '$120.00',
       tax: 'test tax',
       status: 'Processing'
     }
@@ -315,10 +278,10 @@ const Dashboard: React.FC = () => {
         {/* Stats */}
         <div className="col-span-2 space-y-4">
           {stats.map((stat, index) => (
-            <div key={index} className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+            <div key={index} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-600 text-sm">{stat.label}</p>
+                  <p className="text-gray-600 text-sm font-medium">{stat.label}</p>
                   <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
                 </div>
                 <div className={`w-8 h-8 ${stat.color} rounded`}></div>
@@ -328,26 +291,26 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Lifetime Sales */}
-        <div className="col-span-3 bg-gray-800 text-white rounded-lg p-4">
+        <div className="col-span-3 bg-slate-700 text-white rounded-lg p-4 shadow-sm">
           <h3 className="text-sm font-medium mb-2">Lifetime Sales</h3>
           <p className="text-2xl font-bold">₹ 320.29K</p>
-          <div className="mt-4 h-32 bg-gray-700 rounded flex items-center justify-center">
+          <div className="mt-4 h-32 bg-slate-600 rounded flex items-center justify-center">
             <div className="text-center">
-              <MapPin size={32} className="text-gray-400 mx-auto mb-2" />
-              <p className="text-xs text-gray-400">Sales visualization</p>
+              <MapPin size={32} className="text-slate-300 mx-auto mb-2" />
+              <p className="text-xs text-slate-300">Sales visualization</p>
             </div>
           </div>
         </div>
 
         {/* Map */}
-        <div className="col-span-4 bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-          <div className="h-48 bg-gray-100 rounded flex items-center justify-center relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-100 rounded">
+        <div className="col-span-4 bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+          <div className="h-48 bg-gray-50 rounded flex items-center justify-center relative">
+            <div className="absolute inset-0 bg-green-50 rounded">
               <div className="flex items-center justify-center h-full">
                 <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
               </div>
             </div>
-            <div className="absolute bottom-2 left-2 text-xs text-gray-600">
+            <div className="absolute bottom-2 left-2 text-xs text-gray-700 bg-white px-2 py-1 rounded shadow-sm">
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span>₹85,156 ₹ 85,156.4</span>
@@ -359,20 +322,52 @@ const Dashboard: React.FC = () => {
         {/* Transactions & Activities */}
         <div className="col-span-3 space-y-4">
           {/* Transactions */}
-          <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-            <h3 className="text-sm font-medium text-gray-900 mb-3">Transaction</h3>
+          <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+            <h3 className="text-sm font-medium text-gray-900 mb-4">Transaction</h3>
+
+            {/* Financial Summary Cards */}
+            <div className="grid grid-cols-3 gap-3 mb-4">
+              {/* Total Earned */}
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-3 border border-green-200">
+                <div className="flex items-center justify-between mb-2">
+                  <ArrowUpCircle size={20} className="text-green-600" />
+                  <span className="text-xs font-medium text-green-700">Earned</span>
+                </div>
+                <p className="text-lg font-bold text-green-900">$315.49</p>
+              </div>
+
+              {/* Total Withdrawn */}
+              <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-lg p-3 border border-red-200">
+                <div className="flex items-center justify-between mb-2">
+                  <ArrowDownCircle size={20} className="text-red-600" />
+                  <span className="text-xs font-medium text-red-700">Withdrawn</span>
+                </div>
+                <p className="text-lg font-bold text-red-900">$0.00</p>
+              </div>
+
+              {/* Balance */}
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-3 border border-blue-200">
+                <div className="flex items-center justify-between mb-2">
+                  <Wallet size={20} className="text-blue-600" />
+                  <span className="text-xs font-medium text-blue-700">Balance</span>
+                </div>
+                <p className="text-lg font-bold text-blue-900">$315.49</p>
+              </div>
+            </div>
+
+            {/* Transaction List */}
             <div className="space-y-2">
               {transactions.map((transaction, index) => (
-                <div key={index} className="flex justify-between items-center text-sm">
+                <div key={index} className="flex justify-between items-center text-sm py-1">
                   <span className="text-gray-600">{transaction.id}</span>
-                  <span className="font-medium">{transaction.amount}</span>
+                  <span className="font-medium text-gray-900">{transaction.amount}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Activities */}
-          <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
             <h3 className="text-sm font-medium text-gray-900 mb-3">Activities</h3>
             <div className="space-y-2">
               {activities.map((activity, index) => (
@@ -387,8 +382,8 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Latest Orders */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100">
-        <div className="p-4 border-b border-gray-100 flex justify-between items-center">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
           <h3 className="text-lg font-semibold text-gray-900">Latest Orders</h3>
           <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
             View All Orders
@@ -396,16 +391,16 @@ const Dashboard: React.FC = () => {
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-gray-800 text-white">
+            <thead style={{ backgroundColor: '#00666B' }}>
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium">Order</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Date/Time</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Products</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Base Total</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Purchase Total</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Tax</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Status</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">View</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Order</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Date/Time</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Products</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Base Total</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Purchase Total</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Tax</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Status</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>View</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -442,21 +437,21 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Recently Added Products */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100">
-        <div className="p-4 border-b border-gray-100 flex justify-between items-center">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
           <h3 className="text-lg font-semibold text-gray-900">Recently Added Products</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-gray-800 text-white">
+            <thead style={{ backgroundColor: '#00666B' }}>
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium">Product Name</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Price</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Status</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Type</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">SKU</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Created At</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Visibility</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Product Name</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Price</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Status</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Type</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>SKU</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Created At</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Visibility</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -481,21 +476,21 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Latest Seller Tickets */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100">
-        <div className="p-4 border-b border-gray-100 flex justify-between items-center">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
           <h3 className="text-lg font-semibold text-gray-900">Latest Seller Tickets</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-gray-800 text-white">
+            <thead style={{ backgroundColor: '#00666B' }}>
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium">Ticket Id</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Message</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Department</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Agent Name</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Status</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Priority</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Action</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Ticket Id</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Message</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Department</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Agent Name</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Status</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Priority</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Action</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -522,8 +517,8 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Recently Transaction */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100">
-        <div className="p-4 border-b border-gray-100 flex justify-between items-center">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
           <h3 className="text-lg font-semibold text-gray-900">Recently Transaction</h3>
           <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
             View All Transaction
@@ -531,14 +526,14 @@ const Dashboard: React.FC = () => {
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-gray-800 text-white">
+            <thead style={{ backgroundColor: '#00666B' }}>
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium">Transaction Type</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Income Amount</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Expense Amount</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Net Amount</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Status</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Created Date</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Transaction Type</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Income Amount</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Expense Amount</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Net Amount</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Status</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Created Date</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -562,19 +557,19 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Recently Product Review */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100">
-        <div className="p-4 border-b border-gray-100 flex justify-between items-center">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
           <h3 className="text-lg font-semibold text-gray-900">Recently Product Review</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-gray-800 text-white">
+            <thead style={{ backgroundColor: '#00666B' }}>
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium">Customer Name</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Product Sku</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Review Title</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Review Text</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Rating Summary for client</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Customer Name</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Product Sku</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Review Title</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Review Text</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Rating Summary for client</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -598,19 +593,19 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Shipping Order */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100">
-        <div className="p-4 border-b border-gray-100 flex justify-between items-center">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
           <h3 className="text-lg font-semibold text-gray-900">Shipping Order</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-gray-800 text-white">
+            <thead style={{ backgroundColor: '#00666B' }}>
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium">#</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Order</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Shipment</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Date/Time</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Products</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>#</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Order</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Shipment</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Date/Time</th>
+                <th className="px-4 text-left text-xs font-semibold text-white uppercase tracking-wider" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>Products</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -638,8 +633,8 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Order Shipping Pickup */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100">
-        <div className="p-4 border-b border-gray-100">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="p-4 border-b border-gray-200">
           <h3 className="text-lg font-semibold text-gray-900">Order Shipping Pickup</h3>
         </div>
         <div className="p-4">

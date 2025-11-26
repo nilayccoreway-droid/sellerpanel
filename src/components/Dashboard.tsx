@@ -5,15 +5,16 @@ import {
   TrendingUp,
   Star,
   ChevronDown,
-  ArrowUp,
-  ArrowDown,
-  Users,
   DollarSign,
-  BarChart3
+  Users,
+  Wallet,
+  ArrowUpCircle,
+  ArrowDownCircle,
+  Eye
 } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
-  const [selectedTimeframe, setSelectedTimeframe] = useState('Last year');
+  const [selectedTimeframe, setSelectedTimeframe] = useState('Last 7 days');
   const [dateRange, setDateRange] = useState('Jan 1-Dec 31, 2023');
 
   const salesData = [
@@ -31,77 +32,6 @@ const Dashboard: React.FC = () => {
     { month: 'Dec', value: 85 }
   ];
 
-  const sessionsData = [
-    { month: 'Jan', value: 320 },
-    { month: 'Feb', value: 450 },
-    { month: 'Mar', value: 480 },
-    { month: 'Apr', value: 620 },
-    { month: 'May', value: 580 },
-    { month: 'Jun', value: 720 },
-    { month: 'Jul', value: 850 },
-    { month: 'Aug', value: 920 },
-    { month: 'Sep', value: 1100 },
-    { month: 'Oct', value: 1350 },
-    { month: 'Nov', value: 1550 },
-    { month: 'Dec', value: 1694 }
-  ];
-
-  const conversionData = [
-    { month: 'Jan', value: 0.02 },
-    { month: 'Feb', value: 0.03 },
-    { month: 'Mar', value: 0.025 },
-    { month: 'Apr', value: 0.04 },
-    { month: 'May', value: 0.05 },
-    { month: 'Jun', value: 0.045 },
-    { month: 'Jul', value: 0.038 },
-    { month: 'Aug', value: 0.055 },
-    { month: 'Sep', value: 0.048 },
-    { month: 'Oct', value: 0.042 },
-    { month: 'Nov', value: 0.052 },
-    { month: 'Dec', value: 0.06 }
-  ];
-
-  const productSales = [
-    { name: 'Gross sales', value: 'PD 00' },
-    { name: 'Discounts', value: 'PD 00' },
-    { name: 'Returns', value: 'PD 00' },
-    { name: 'Net sales', value: 'PD 00' },
-    { name: 'Balance charges', value: 'PD 00' },
-    { name: 'Return fees', value: 'PD 00' },
-    { name: 'Taxes', value: 'PD 00' },
-    { name: 'Total sales', value: 'PD 00' }
-  ];
-
-  const deviceTypes = [
-    { name: 'Desktop', value: 1.6, percentage: 85, color: '#3B82F6' },
-    { name: 'Mobile', value: 0.3, percentage: 15, color: '#A855F7' }
-  ];
-
-  const locationData = [
-    { location: 'United States - Alpha - Generic Scams', count: 1344 },
-    { location: 'United States - Alpha - None', count: 632 },
-    { location: 'Cayman - Ahmedabad', count: 156 },
-    { location: 'Poland - None', count: 89 },
-    { location: 'India - Maharashtra - Mumbai', count: 67 }
-  ];
-
-  const referrerData = [
-    { source: 'Direct - None - Generic Scams', count: 1344 },
-    { source: 'Direct - None - None', count: 632 }
-  ];
-
-  const landingPages = [
-    { page: 'Homepage /', count: 1256 },
-    { page: 'Home - /products_preview', count: 62 },
-    { page: 'Product - /products/coastal-cabin-assembly', count: 18 },
-    { page: 'Collection - /collection/cabin-assembly', count: 7 },
-    { page: 'Product - /products/coastal-cabin-assembly-copy', count: 3 },
-    { page: 'Product - /products/home-coastal-main-single-cone-far-right-cabin', count: 2 },
-    { page: 'Product - /products/home-main-single-cone-far-right-cabin', count: 2 },
-    { page: 'Collection - /collection/cabin-assembly', count: 2 }
-  ];
-
-  // Latest Orders data
   const latestOrders = [
     {
       id: '100000001',
@@ -145,7 +75,6 @@ const Dashboard: React.FC = () => {
     }
   ];
 
-  // Recently Added Products
   const recentProducts = [
     {
       id: 1,
@@ -155,7 +84,8 @@ const Dashboard: React.FC = () => {
       type: 'simple',
       sku: 'ZUUROAD1701-REDVELVET',
       createdAt: 'Jul 31, 2024 8:30 PM',
-      quantity: 'Catalog, Search'
+      quantity: 'Catalog, Search',
+      image: 'https://images.pexels.com/photos/2144112/pexels-photo-2144112.jpeg?auto=compress&cs=tinysrgb&w=300'
     },
     {
       id: 2,
@@ -163,13 +93,35 @@ const Dashboard: React.FC = () => {
       price: '$10.99',
       status: 'Approved',
       type: 'simple',
-      sku: 'ZUUROAD1701-REDVELVET',
+      sku: 'ZUUROAD1701-TEST',
       createdAt: 'Jul 31, 2024 10:45 AM',
-      quantity: 'Catalog, Search'
+      quantity: 'Catalog, Search',
+      image: 'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=300'
+    },
+    {
+      id: 3,
+      name: 'Ring - Accessories',
+      price: '$25.99',
+      status: 'Approved',
+      type: 'simple',
+      sku: 'ZUUROAD1701-RING',
+      createdAt: 'Jul 30, 2024 3:20 PM',
+      quantity: 'Catalog, Search',
+      image: 'https://images.pexels.com/photos/265856/pexels-photo-265856.jpeg?auto=compress&cs=tinysrgb&w=300'
+    },
+    {
+      id: 4,
+      name: 'Bag - Women Product',
+      price: '$45.99',
+      status: 'Approved',
+      type: 'simple',
+      sku: 'ZUUROAD1701-BAG',
+      createdAt: 'Jul 29, 2024 11:10 AM',
+      quantity: 'Catalog, Search',
+      image: 'https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=300'
     }
   ];
 
-  // Latest Seller Tickets
   const sellerTickets = [
     {
       id: '10000016',
@@ -181,7 +133,6 @@ const Dashboard: React.FC = () => {
     }
   ];
 
-  // Recently Transaction
   const recentTransactions = [
     {
       type: 'order',
@@ -201,7 +152,6 @@ const Dashboard: React.FC = () => {
     }
   ];
 
-  // Recently Product Review
   const productReviews = [
     {
       id: 1,
@@ -241,7 +191,6 @@ const Dashboard: React.FC = () => {
     }
   ];
 
-  // Shipping Order
   const shippingOrders = [
     {
       id: '100000002',
@@ -277,35 +226,19 @@ const Dashboard: React.FC = () => {
       shipment: 'ZUUROAD06',
       date: 'Jun 14, 2024 4:10 PM',
       products: ['Ring - Accessories', 'Bag - Women Product', 'Bracelet 1', 'Bracelet 2']
-    },
-    {
-      id: '100000007',
-      customer: 'ZUUROAD07',
-      shipment: 'ZUUROAD07',
-      date: 'Jun 14, 2024 3:30 PM',
-      products: ['Ring - Accessories', 'Bag - Women Product', 'Bracelet 1', 'Bracelet 2']
-    },
-    {
-      id: '100000008',
-      customer: 'ZUUROAD08',
-      shipment: 'ZUUROAD08',
-      date: 'Jun 14, 2024 2:45 PM',
-      products: ['Ring - Accessories', 'Bag - Women Product', 'Bracelet 1', 'Bracelet 2']
-    },
-    {
-      id: '100000009',
-      customer: 'ZUUROAD09',
-      shipment: 'ZUUROAD09',
-      date: 'Jun 14, 2024 1:20 PM',
-      products: ['Ring - Accessories', 'Bag - Women Product', 'Bracelet 1', 'Bracelet 2']
-    },
-    {
-      id: '100000010',
-      customer: 'ZUUROAD10',
-      shipment: 'ZUUROAD10',
-      date: 'Jun 14, 2024 12:15 PM',
-      products: ['Ring - Accessories', 'Bag - Women Product', 'Bracelet 1', 'Bracelet 2']
     }
+  ];
+
+  const transactions = [
+    { id: 'MRKPL00001', customer: 'Test Customer', amount: '$150.00' },
+    { id: 'MRKPL00002', customer: 'Test Customer', amount: '$89.99' },
+    { id: 'MRKPL00003', customer: 'Test Customer', amount: '$75.50' }
+  ];
+
+  const activities = [
+    { time: 'Jun 14', activity: 'New order received' },
+    { time: 'Jun 13', activity: 'Product updated' },
+    { time: 'Jun 12', activity: 'Customer inquiry' }
   ];
 
   const LineChart = ({ data, height = 120, color = '#3B82F6' }: { data: any[], height?: number, color?: string }) => {
@@ -342,493 +275,267 @@ const Dashboard: React.FC = () => {
     );
   };
 
-  const BarChart = ({ data, height = 140 }: { data: any[], height?: number }) => {
-    const max = Math.max(...data.map(d => d.value));
-    const barWidth = 100 / data.length;
-
+  const renderStars = (rating: number) => {
     return (
-      <svg width="100%" height={height}>
-        {data.map((d, i) => {
-          const barHeight = (d.value / max) * height * 0.8;
-          const x = i * barWidth;
-          const y = height - barHeight;
-          return (
-            <rect
-              key={i}
-              x={`${x}%`}
-              y={y}
-              width={`${barWidth * 0.8}%`}
-              height={barHeight}
-              fill="#3B82F6"
-              rx="2"
-            />
-          );
-        })}
-      </svg>
-    );
-  };
-
-  const DonutChart = ({ data }: { data: any[] }) => {
-    const total = data.reduce((sum, d) => sum + d.percentage, 0);
-    let currentAngle = -90;
-
-    return (
-      <div className="relative w-48 h-48 mx-auto">
-        <svg width="192" height="192" viewBox="0 0 192 192">
-          {data.map((item, index) => {
-            const angle = (item.percentage / total) * 360;
-            const startAngle = currentAngle;
-            const endAngle = currentAngle + angle;
-            currentAngle = endAngle;
-
-            const startRad = (startAngle * Math.PI) / 180;
-            const endRad = (endAngle * Math.PI) / 180;
-
-            const x1 = 96 + 70 * Math.cos(startRad);
-            const y1 = 96 + 70 * Math.sin(startRad);
-            const x2 = 96 + 70 * Math.cos(endRad);
-            const y2 = 96 + 70 * Math.sin(endRad);
-
-            const largeArcFlag = angle > 180 ? 1 : 0;
-
-            const pathData = [
-              `M 96 96`,
-              `L ${x1} ${y1}`,
-              `A 70 70 0 ${largeArcFlag} 1 ${x2} ${y2}`,
-              'Z'
-            ].join(' ');
-
-            return (
-              <path
-                key={index}
-                d={pathData}
-                fill={item.color}
-              />
-            );
-          })}
-          <circle cx="96" cy="96" r="45" fill="white" />
-        </svg>
-        <div className="absolute inset-0 flex items-center justify-center flex-col">
-          <div className="text-3xl font-bold text-gray-900">1.7K</div>
-        </div>
+      <div className="flex">
+        {[...Array(5)].map((_, i) => (
+          <Star
+            key={i}
+            size={14}
+            className={i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}
+          />
+        ))}
       </div>
     );
   };
 
+  const totalOrders = latestOrders.length;
+  const totalProducts = recentProducts.length + 59;
+  const totalRevenue = latestOrders.reduce((sum, order) => {
+    const amount = parseFloat(order.purchaseTotal.replace('$', ''));
+    return sum + amount;
+  }, 0);
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Header Controls */}
       <div className="flex items-center justify-between bg-white px-6 py-4 rounded-lg shadow-sm border border-gray-200">
         <div className="flex items-center space-x-4">
-          <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
-            {selectedTimeframe}
+          <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 flex items-center space-x-2">
+            <span>{selectedTimeframe}</span>
+            <ChevronDown size={16} />
           </button>
           <div className="flex items-center space-x-2 text-sm text-gray-600">
             <span>{dateRange}</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-600">EZ MKT F</span>
-          </div>
         </div>
-        <button className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-md hover:bg-gray-800">
-          New dashboard
-        </button>
       </div>
 
       {/* Top Metrics Row */}
-      <div className="grid grid-cols-4 gap-4">
-        {/* Gross Sales */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-medium text-gray-600">Gross sales</h3>
-            <ChevronDown size={16} className="text-gray-400" />
-          </div>
-          <div className="flex items-baseline space-x-2">
-            <span className="text-3xl font-bold text-gray-900">PD</span>
-            <span className="text-sm text-gray-500">PD</span>
-          </div>
-        </div>
-
-        {/* Returning Customer Rate */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-medium text-gray-600">Returning customer rate</h3>
-            <ChevronDown size={16} className="text-gray-400" />
-          </div>
-          <div className="flex items-baseline space-x-2">
-            <span className="text-3xl font-bold text-gray-900">0%</span>
-          </div>
-        </div>
-
-        {/* Orders Fulfilled */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-medium text-gray-600">Orders fulfilled</h3>
-            <ChevronDown size={16} className="text-gray-400" />
-          </div>
-          <div className="flex items-baseline space-x-2">
-            <span className="text-3xl font-bold text-gray-900">9</span>
-            <span className="text-sm text-blue-600 flex items-center">
-              <TrendingUp size={14} className="mr-1" />
-            </span>
-          </div>
-        </div>
-
-        {/* Orders */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-medium text-gray-600">Orders</h3>
-            <ChevronDown size={16} className="text-gray-400" />
-          </div>
-          <div className="flex items-baseline space-x-2">
-            <span className="text-3xl font-bold text-gray-900">{latestOrders.length}</span>
-            <span className="text-sm text-blue-600 flex items-center">
-              <TrendingUp size={14} className="mr-1" />
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Charts Row */}
-      <div className="grid grid-cols-3 gap-4">
-        {/* Total Sales Over Time */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Total Sales */}
+        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 shadow-lg text-white">
           <div className="flex items-center justify-between mb-4">
-            <div>
-              <h3 className="text-sm font-medium text-gray-900">Total sales over time</h3>
-              <div className="flex items-baseline space-x-2 mt-2">
-                <span className="text-2xl font-bold text-gray-900">PD</span>
-                <span className="text-sm text-gray-500">PD</span>
-              </div>
+            <div className="p-3 bg-white bg-opacity-20 rounded-lg">
+              <DollarSign size={24} />
+            </div>
+            <div className="text-right">
+              <div className="text-sm font-medium opacity-90">Total Sales</div>
+              <div className="text-3xl font-bold">${totalRevenue.toFixed(2)}</div>
             </div>
           </div>
-          <div className="mt-4">
-            <LineChart data={salesData} height={120} color="#3B82F6" />
-          </div>
-          <div className="flex justify-between items-center mt-4 text-xs text-gray-500">
-            {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'].map((month, i) => (
-              <span key={i}>{month}</span>
-            ))}
+          <div className="flex items-center text-sm opacity-90">
+            <TrendingUp size={16} className="mr-1" />
+            <span>+12.5% from last month</span>
           </div>
         </div>
 
-        {/* Average Order Value */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+        {/* Total Orders */}
+        <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-6 shadow-lg text-white">
           <div className="flex items-center justify-between mb-4">
+            <div className="p-3 bg-white bg-opacity-20 rounded-lg">
+              <ShoppingCart size={24} />
+            </div>
+            <div className="text-right">
+              <div className="text-sm font-medium opacity-90">Orders</div>
+              <div className="text-3xl font-bold">{totalOrders}</div>
+            </div>
+          </div>
+          <div className="flex items-center text-sm opacity-90">
+            <TrendingUp size={16} className="mr-1" />
+            <span>+8.3% from last month</span>
+          </div>
+        </div>
+
+        {/* Total Products */}
+        <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 shadow-lg text-white">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 bg-white bg-opacity-20 rounded-lg">
+              <Package size={24} />
+            </div>
+            <div className="text-right">
+              <div className="text-sm font-medium opacity-90">Products</div>
+              <div className="text-3xl font-bold">{totalProducts}</div>
+            </div>
+          </div>
+          <div className="flex items-center text-sm opacity-90">
+            <TrendingUp size={16} className="mr-1" />
+            <span>+5 new this week</span>
+          </div>
+        </div>
+
+        {/* Total Customers */}
+        <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-6 shadow-lg text-white">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 bg-white bg-opacity-20 rounded-lg">
+              <Users size={24} />
+            </div>
+            <div className="text-right">
+              <div className="text-sm font-medium opacity-90">Customers</div>
+              <div className="text-3xl font-bold">{latestOrders.length}</div>
+            </div>
+          </div>
+          <div className="flex items-center text-sm opacity-90">
+            <TrendingUp size={16} className="mr-1" />
+            <span>Active customers</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Sales Chart and Financial Summary */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Sales Over Time Chart */}
+        <div className="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+          <div className="flex items-center justify-between mb-6">
             <div>
-              <h3 className="text-sm font-medium text-gray-900">Average order value over time</h3>
-              <div className="flex items-baseline space-x-2 mt-2">
-                <span className="text-2xl font-bold text-gray-900">PD</span>
-                <span className="text-sm text-gray-500">PD</span>
-              </div>
+              <h3 className="text-lg font-semibold text-gray-900">Sales Overview</h3>
+              <p className="text-sm text-gray-500 mt-1">Monthly sales performance</p>
             </div>
           </div>
           <div className="mt-4">
-            <LineChart data={salesData} height={120} color="#10B981" />
+            <LineChart data={salesData} height={200} color="#3B82F6" />
           </div>
-          <div className="flex justify-between items-center mt-4 text-xs text-gray-500">
-            {['Jan', 'May', 'Sep', 'Nov'].map((month, i) => (
+          <div className="flex justify-between items-center mt-6 text-xs text-gray-500">
+            {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((month, i) => (
               <span key={i}>{month}</span>
             ))}
           </div>
         </div>
 
-        {/* Total Sales Breakdown */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-4">Total sales breakdown</h3>
-          <div className="space-y-3">
-            {productSales.map((item, index) => (
-              <div key={index} className="flex justify-between items-center">
-                <span className="text-sm text-blue-600">{item.name}</span>
-                <span className="text-sm font-medium text-gray-900">{item.value}</span>
+        {/* Financial Summary */}
+        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-900 mb-6">Financial Summary</h3>
+
+          {/* Earned, Withdrawn, Balance Cards */}
+          <div className="space-y-4 mb-6">
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
+              <div className="flex items-center justify-between mb-2">
+                <ArrowUpCircle size={20} className="text-green-600" />
+                <span className="text-xs font-medium text-green-700">Total Earned</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
+              <p className="text-2xl font-bold text-green-900">$315.49</p>
+            </div>
 
-      {/* Middle Charts Row */}
-      <div className="grid grid-cols-3 gap-4">
-        {/* Sales by Channel */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-4">Total sales by sales channel</h3>
-          <div className="h-32 flex items-center justify-center text-sm text-gray-500">
-            No data for this date range
-          </div>
-        </div>
+            <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-lg p-4 border border-red-200">
+              <div className="flex items-center justify-between mb-2">
+                <ArrowDownCircle size={20} className="text-red-600" />
+                <span className="text-xs font-medium text-red-700">Withdrawn</span>
+              </div>
+              <p className="text-2xl font-bold text-red-900">$0.00</p>
+            </div>
 
-        {/* Sales by Product */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-4">Total sales by product</h3>
-          <div className="h-32 flex items-center justify-center text-sm text-gray-500">
-            No data for this date range
-          </div>
-        </div>
-
-        {/* Sales by Social Referrer */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-4">Total sales by social referrer</h3>
-          <div className="h-32 flex items-center justify-center text-sm text-gray-500">
-            No data for this date range
-          </div>
-        </div>
-      </div>
-
-      {/* Sessions and Conversion Row */}
-      <div className="grid grid-cols-3 gap-4">
-        {/* Sessions Over Time */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <div className="mb-4">
-            <h3 className="text-sm font-medium text-gray-900">Sessions over time</h3>
-            <div className="flex items-baseline space-x-2 mt-2">
-              <span className="text-2xl font-bold text-gray-900">{sessionsData[sessionsData.length - 1].value}</span>
-              <span className="text-sm text-gray-500">800</span>
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-4 border border-blue-200">
+              <div className="flex items-center justify-between mb-2">
+                <Wallet size={20} className="text-blue-600" />
+                <span className="text-xs font-medium text-blue-700">Balance</span>
+              </div>
+              <p className="text-2xl font-bold text-blue-900">$315.49</p>
             </div>
           </div>
-          <div className="mt-4">
-            <LineChart data={sessionsData} height={120} color="#06B6D4" />
-          </div>
-          <div className="flex justify-between items-center mt-4 text-xs text-gray-500">
-            {['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov'].map((month, i) => (
-              <span key={i}>{month}</span>
-            ))}
-          </div>
-        </div>
 
-        {/* Conversion Rate */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <div className="mb-4">
-            <h3 className="text-sm font-medium text-gray-900">Conversion rate over time</h3>
-            <div className="flex items-baseline space-x-2 mt-2">
-              <span className="text-2xl font-bold text-gray-900">0.06%</span>
-              <span className="text-sm text-gray-500">0.3%</span>
-            </div>
-          </div>
-          <div className="mt-4">
-            <LineChart data={conversionData} height={120} color="#8B5CF6" />
-          </div>
-          <div className="flex justify-between items-center mt-4 text-xs text-gray-500">
-            {['Jan', 'May', 'Sep', 'Nov'].map((month, i) => (
-              <span key={i}>{month}</span>
-            ))}
-          </div>
-        </div>
-
-        {/* Conversion Breakdown */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-4">Conversion rate breakdown</h3>
-          <div className="mb-4">
-            <div className="flex items-baseline space-x-2">
-              <span className="text-2xl font-bold text-gray-900">0.06%</span>
-            </div>
-          </div>
-          <div className="space-y-3">
-            {[
-              { label: 'Sessions', value: '100%', subValue: '0.41%', change: '74.7%' },
-              { label: 'Added to cart', value: '0.41%', subValue: '0.53%', change: '9.9%' },
-              { label: 'Reached checkout', value: '0.53%', subValue: '0.06%', change: '0.6%' },
-              { label: 'Completed', value: '0.06%', subValue: '', change: '' }
-            ].map((item, index) => (
-              <div key={index} className="flex justify-between items-center">
-                <div className="flex-1">
-                  <div className="text-sm text-gray-900">{item.label}</div>
-                  <div className="text-xs text-gray-500">{item.value}</div>
-                </div>
-                {item.subValue && (
-                  <div className="text-right">
-                    <div className="text-sm font-medium text-gray-900">{item.subValue}</div>
-                    <div className="text-xs text-gray-500">{item.change}</div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-          <div className="mt-4">
-            <BarChart data={[{ value: 100 }, { value: 42 }, { value: 25 }, { value: 15 }]} height={80} />
-          </div>
-        </div>
-      </div>
-
-      {/* Device Types and Location Row */}
-      <div className="grid grid-cols-3 gap-4">
-        {/* Sessions by Device */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-4">Sessions by device type</h3>
-          <DonutChart data={deviceTypes} />
-          <div className="mt-4 space-y-2">
-            {deviceTypes.map((device, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: device.color }}></div>
-                  <span className="text-sm text-gray-700">{device.name}</span>
-                </div>
-                <span className="text-sm font-medium text-gray-900">{device.value}K</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Sessions by Location */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-4">Sessions by location</h3>
-          <div className="space-y-2">
-            {locationData.map((item, index) => (
-              <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                <div className="flex-1">
-                  <div className="text-sm text-gray-900 truncate">{item.location}</div>
-                </div>
-                <div className="ml-4">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-24 h-2 bg-gray-100 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-blue-500 rounded-full"
-                        style={{ width: `${(item.count / locationData[0].count) * 100}%` }}
-                      ></div>
-                    </div>
-                    <span className="text-sm font-medium text-gray-900 w-12 text-right">{item.count}</span>
+          {/* Recent Activities */}
+          <div>
+            <h4 className="text-sm font-semibold text-gray-900 mb-3">Recent Activities</h4>
+            <div className="space-y-3">
+              {activities.map((activity, index) => (
+                <div key={index} className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                  <div className="flex-1">
+                    <div className="text-xs text-gray-500">{activity.time}</div>
+                    <div className="text-sm text-gray-700">{activity.activity}</div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Sessions by Landing Page */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-4">Sessions by landing page</h3>
-          <div className="space-y-2">
-            {landingPages.slice(0, 7).map((item, index) => (
-              <div key={index} className="flex items-center justify-between py-1.5">
-                <div className="flex-1 truncate">
-                  <span className="text-sm text-gray-900">{item.page}</span>
-                </div>
-                <span className="text-sm font-medium text-gray-900 ml-4">{item.count}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Row - Referrers and More */}
-      <div className="grid grid-cols-3 gap-4">
-        {/* Sessions by Referrer */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-4">Sessions by referrer</h3>
-          <div className="space-y-3">
-            {referrerData.map((item, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex-1">
-                  <div className="text-sm text-gray-900 truncate">{item.source}</div>
-                </div>
-                <div className="ml-4">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-32 h-2 bg-gray-100 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-cyan-500 rounded-full"
-                        style={{ width: `${(item.count / referrerData[0].count) * 100}%` }}
-                      ></div>
-                    </div>
-                    <span className="text-sm font-medium text-gray-900">{item.count}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 h-32 flex items-center justify-center text-sm text-gray-500">
-            Additional data visualization
-          </div>
-        </div>
-
-        {/* Sales Referrer */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-4">Total sales by referrer</h3>
-          <div className="h-40 flex items-center justify-center text-sm text-gray-500">
-            No data for this date range
-          </div>
-        </div>
-
-        {/* Sales Attribution */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-4">Sales attributed for marketing</h3>
-          <div className="h-40 flex items-center justify-center text-sm text-gray-500">
-            No data for this date range
-          </div>
-        </div>
-      </div>
-
-      {/* Customer Cohort Analysis */}
-      <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-        <h3 className="text-sm font-medium text-gray-900 mb-4">Customer cohort analysis</h3>
-        <div className="overflow-x-auto">
-          <table className="min-w-full">
-            <thead>
-              <tr className="border-b border-gray-200">
-                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Cohort</th>
-                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Customers</th>
-                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Retention r...</th>
-                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 0</th>
-                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 1</th>
-                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 2</th>
-                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 3</th>
-                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 4</th>
-                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 5</th>
-                <th className="px-3 py-2 text-left text-xs font-medium text-gray-600">Month 6</th>
-              </tr>
-            </thead>
-            <tbody>
-              {['All cohorts', 'Nov 2024', 'Dec 2024', 'Jan 2025', 'Feb 2025', 'Mar 2025', 'May 2025'].map((cohort, index) => (
-                <tr key={index} className="border-b border-gray-100">
-                  <td className="px-3 py-2 text-sm text-gray-900">{cohort}</td>
-                  <td className="px-3 py-2 text-sm text-gray-900">0</td>
-                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
-                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
-                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
-                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
-                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
-                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
-                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
-                  <td className="px-3 py-2 text-sm text-gray-600">0.0%</td>
-                </tr>
               ))}
-            </tbody>
-          </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Top Products - Card View */}
+      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">Top Products</h3>
+            <p className="text-sm text-gray-500 mt-1">Best selling products</p>
+          </div>
+          <button className="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center">
+            View All <ChevronDown size={16} className="ml-1" />
+          </button>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {recentProducts.map((product) => (
+            <div key={product.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-200 group">
+              <div className="relative h-48 bg-gray-100 overflow-hidden">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute top-2 right-2">
+                  <span className="inline-flex px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                    {product.status}
+                  </span>
+                </div>
+              </div>
+              <div className="p-4">
+                <h4 className="text-sm font-semibold text-gray-900 mb-2 line-clamp-2">{product.name}</h4>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-500">SKU:</span>
+                    <span className="text-xs font-medium text-gray-700">{product.sku}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-500">Price:</span>
+                    <span className="text-lg font-bold text-blue-600">{product.price}</span>
+                  </div>
+                </div>
+                <button className="mt-4 w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2">
+                  <Eye size={16} />
+                  <span>View Details</span>
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Latest Orders */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-          <h3 className="text-base font-semibold text-gray-900">Latest Orders</h3>
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">Latest Orders</h3>
+            <p className="text-sm text-gray-500 mt-1">Recent customer orders</p>
+          </div>
           <button className="text-sm text-blue-600 hover:text-blue-800 font-medium">
-            View All
+            View All Orders
           </button>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full">
+          <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Order ID</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Customer</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Products</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Total</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Order ID</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Date</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Customer</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Products</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Total</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {latestOrders.slice(0, 5).map((order) => (
+              {latestOrders.map((order) => (
                 <tr key={order.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900">#{order.id}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600">{order.date}</td>
-                  <td className="px-6 py-4 text-sm text-gray-900">{order.customer}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#{order.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{order.date}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{order.customer}</td>
                   <td className="px-6 py-4 text-sm text-gray-600">
                     <div className="max-w-xs truncate">
                       {order.products[0]}
                       {order.products.length > 1 && ` +${order.products.length - 1} more`}
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-sm font-semibold text-gray-900">{order.purchaseTotal}</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">{order.purchaseTotal}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
                     <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${
                       order.status === 'Completed'
                         ? 'bg-green-100 text-green-700'
@@ -844,38 +551,158 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Top Products */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-          <h3 className="text-base font-semibold text-gray-900">Top Products</h3>
-          <button className="text-sm text-blue-600 hover:text-blue-800 font-medium">
-            View All
-          </button>
+      {/* Latest Seller Tickets */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="p-6 border-b border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-900">Latest Seller Tickets</h3>
+          <p className="text-sm text-gray-500 mt-1">Support tickets and inquiries</p>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full">
+          <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Product</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">SKU</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Price</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Orders</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Revenue</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Rating</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Ticket ID</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Message</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Department</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Agent</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Priority</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Action</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {recentProducts.map((product) => (
-                <tr key={product.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900">{product.name}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600">{product.sku}</td>
-                  <td className="px-6 py-4 text-sm text-gray-900">{product.price}</td>
-                  <td className="px-6 py-4 text-sm text-gray-900">8</td>
-                  <td className="px-6 py-4 text-sm font-semibold text-gray-900">$127.92</td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center space-x-1">
-                      <Star size={14} className="text-yellow-400 fill-current" />
-                      <span className="text-sm text-gray-900">5.0</span>
+              {sellerTickets.map((ticket) => (
+                <tr key={ticket.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#{ticket.id}</td>
+                  <td className="px-6 py-4 text-sm text-gray-900">{ticket.message}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">{ticket.department}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">{ticket.agentName}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className="inline-flex px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                      {ticket.status}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-600">{ticket.priority}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">Reply</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Recent Transactions */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="p-6 border-b border-gray-200 flex justify-between items-center">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
+            <p className="text-sm text-gray-500 mt-1">Latest transaction history</p>
+          </div>
+          <button className="text-sm text-blue-600 hover:text-blue-800 font-medium">
+            View All Transactions
+          </button>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Type</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Income</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Expense</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Net Amount</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Date</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {recentTransactions.map((transaction, index) => (
+                <tr key={index} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 capitalize">{transaction.type}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">{transaction.incomeAmount}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-red-600">{transaction.expenseAmount}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">{transaction.netAmount}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className="inline-flex px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 capitalize">
+                      {transaction.status}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{transaction.createdDate}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Product Reviews */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="p-6 border-b border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-900">Recent Product Reviews</h3>
+          <p className="text-sm text-gray-500 mt-1">Customer feedback and ratings</p>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Customer</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Product SKU</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Product</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Review</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Rating</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {productReviews.map((review) => (
+                <tr key={review.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{review.customer}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{review.productSku}</td>
+                  <td className="px-6 py-4 text-sm text-gray-900">{review.product}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600 max-w-md truncate">{review.reviewText}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center space-x-2">
+                      {renderStars(review.rating)}
+                      <span className="text-xs text-gray-500">({review.reviewSummary})</span>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Shipping Orders */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="p-6 border-b border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-900">Shipping Orders</h3>
+          <p className="text-sm text-gray-500 mt-1">Orders ready for shipment</p>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">#</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Order ID</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Customer</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Shipment</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Date</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Products</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {shippingOrders.map((order, index) => (
+                <tr key={order.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{index + 1}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#{order.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{order.customer}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{order.shipment}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{order.date}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">
+                    <div className="max-w-xs truncate">
+                      {order.products[0]}
+                      {order.products.length > 1 && ` +${order.products.length - 1} more`}
                     </div>
                   </td>
                 </tr>

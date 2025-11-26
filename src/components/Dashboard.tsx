@@ -275,6 +275,43 @@ const Dashboard: React.FC = () => {
     );
   };
 
+  const DonutChart = ({ percentage, color }: { percentage: number, color: string }) => {
+    const radius = 70;
+    const circumference = 2 * Math.PI * radius;
+    const strokeDashoffset = circumference - (percentage / 100) * circumference;
+
+    return (
+      <div className="relative w-48 h-48 mx-auto">
+        <svg width="192" height="192" viewBox="0 0 192 192" className="transform -rotate-90">
+          <circle
+            cx="96"
+            cy="96"
+            r={radius}
+            fill="none"
+            stroke="#E5E7EB"
+            strokeWidth="20"
+          />
+          <circle
+            cx="96"
+            cy="96"
+            r={radius}
+            fill="none"
+            stroke={color}
+            strokeWidth="20"
+            strokeDasharray={circumference}
+            strokeDashoffset={strokeDashoffset}
+            strokeLinecap="round"
+            className="transition-all duration-1000 ease-out"
+          />
+        </svg>
+        <div className="absolute inset-0 flex items-center justify-center flex-col">
+          <div className="text-sm text-gray-600">Approved Products</div>
+          <div className="text-4xl font-bold text-gray-900">{recentProducts.length}</div>
+        </div>
+      </div>
+    );
+  };
+
   const renderStars = (rating: number) => {
     return (
       <div className="flex">
@@ -298,21 +335,8 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header Controls */}
-      <div className="flex items-center justify-between bg-white px-6 py-4 rounded-lg shadow-sm border border-gray-200">
-        <div className="flex items-center space-x-4">
-          <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 flex items-center space-x-2">
-            <span>{selectedTimeframe}</span>
-            <ChevronDown size={16} />
-          </button>
-          <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <span>{dateRange}</span>
-          </div>
-        </div>
-      </div>
-
       {/* Top Metrics Row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Total Sales */}
         <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 shadow-lg text-white">
           <div className="flex items-center justify-between mb-4">
@@ -363,22 +387,19 @@ const Dashboard: React.FC = () => {
             <span>+5 new this week</span>
           </div>
         </div>
+      </div>
 
-        {/* Total Customers */}
-        <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-6 shadow-lg text-white">
-          <div className="flex items-center justify-between mb-4">
-            <div className="p-3 bg-white bg-opacity-20 rounded-lg">
-              <Users size={24} />
-            </div>
-            <div className="text-right">
-              <div className="text-sm font-medium opacity-90">Customers</div>
-              <div className="text-3xl font-bold">{latestOrders.length}</div>
-            </div>
-          </div>
-          <div className="flex items-center text-sm opacity-90">
-            <TrendingUp size={16} className="mr-1" />
-            <span>Active customers</span>
-          </div>
+      {/* Product Status */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="bg-orange-500 px-6 py-4 flex items-center space-x-2">
+          <Package size={20} className="text-white" />
+          <h3 className="text-lg font-semibold text-white">Products Status</h3>
+        </div>
+        <div className="p-8">
+          <DonutChart percentage={100} color="#14B8A6" />
+          <button className="mt-6 w-full px-4 py-3 bg-white text-gray-700 text-sm font-medium rounded-lg border-2 border-gray-300 hover:bg-gray-50 transition-colors">
+            View Details
+          </button>
         </div>
       </div>
 
@@ -391,14 +412,48 @@ const Dashboard: React.FC = () => {
               <h3 className="text-lg font-semibold text-gray-900">Sales Overview</h3>
               <p className="text-sm text-gray-500 mt-1">Monthly sales performance</p>
             </div>
+            <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1">
+                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                <span className="text-xs text-gray-600">2023</span>
+              </div>
+            </div>
           </div>
-          <div className="mt-4">
-            <LineChart data={salesData} height={200} color="#3B82F6" />
+          <div className="mt-4 relative">
+            <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-xs text-gray-400">
+              <span>100</span>
+              <span>75</span>
+              <span>50</span>
+              <span>25</span>
+              <span>0</span>
+            </div>
+            <div className="ml-8">
+              <LineChart data={salesData} height={200} color="#3B82F6" />
+            </div>
           </div>
-          <div className="flex justify-between items-center mt-6 text-xs text-gray-500">
+          <div className="flex justify-between items-center mt-6 text-xs text-gray-500 ml-8">
             {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((month, i) => (
               <span key={i}>{month}</span>
             ))}
+          </div>
+          <div className="mt-6 pt-4 border-t border-gray-200">
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <p className="text-xs text-gray-500">Highest</p>
+                <p className="text-lg font-bold text-gray-900">$98K</p>
+                <p className="text-xs text-gray-400">November</p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-500">Lowest</p>
+                <p className="text-lg font-bold text-gray-900">$65K</p>
+                <p className="text-xs text-gray-400">January</p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-500">Average</p>
+                <p className="text-lg font-bold text-gray-900">$83.5K</p>
+                <p className="text-xs text-gray-400">Per month</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -499,6 +554,55 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
+      {/* Recent Transactions */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
+            <p className="text-sm text-gray-500 mt-1">Latest transaction history</p>
+          </div>
+          <button className="text-sm text-blue-600 hover:text-blue-800 font-medium">
+            View All
+          </button>
+        </div>
+        <div className="space-y-4">
+          {recentTransactions.map((transaction, index) => (
+            <div key={index} className="bg-gradient-to-r from-gray-50 to-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-200">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="p-3 bg-blue-100 rounded-lg">
+                    <DollarSign size={24} className="text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-900 capitalize">{transaction.type} Transaction</h4>
+                    <p className="text-xs text-gray-500 mt-1">{transaction.createdDate}</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <span className="inline-flex px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 capitalize">
+                    {transaction.status}
+                  </span>
+                </div>
+              </div>
+              <div className="mt-4 grid grid-cols-3 gap-4">
+                <div className="bg-white rounded-lg p-3 border border-green-200">
+                  <p className="text-xs text-gray-500 mb-1">Income</p>
+                  <p className="text-lg font-bold text-green-600">{transaction.incomeAmount}</p>
+                </div>
+                <div className="bg-white rounded-lg p-3 border border-red-200">
+                  <p className="text-xs text-gray-500 mb-1">Expense</p>
+                  <p className="text-lg font-bold text-red-600">{transaction.expenseAmount}</p>
+                </div>
+                <div className="bg-white rounded-lg p-3 border border-blue-200">
+                  <p className="text-xs text-gray-500 mb-1">Net Amount</p>
+                  <p className="text-lg font-bold text-blue-600">{transaction.netAmount}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Latest Orders */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div className="p-6 border-b border-gray-200 flex justify-between items-center">
@@ -586,49 +690,6 @@ const Dashboard: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">Reply</button>
                   </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Recent Transactions */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
-            <p className="text-sm text-gray-500 mt-1">Latest transaction history</p>
-          </div>
-          <button className="text-sm text-blue-600 hover:text-blue-800 font-medium">
-            View All Transactions
-          </button>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Type</th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Income</th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Expense</th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Net Amount</th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Date</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {recentTransactions.map((transaction, index) => (
-                <tr key={index} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 capitalize">{transaction.type}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">{transaction.incomeAmount}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-red-600">{transaction.expenseAmount}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">{transaction.netAmount}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="inline-flex px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 capitalize">
-                      {transaction.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{transaction.createdDate}</td>
                 </tr>
               ))}
             </tbody>

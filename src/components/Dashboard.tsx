@@ -275,38 +275,63 @@ const Dashboard: React.FC = () => {
     );
   };
 
-  const DonutChart = ({ percentage, color }: { percentage: number, color: string }) => {
-    const radius = 70;
+  const MultiSegmentDonutChart = () => {
+    const radius = 60;
     const circumference = 2 * Math.PI * radius;
-    const strokeDashoffset = circumference - (percentage / 100) * circumference;
+
+    const approved = 3;
+    const pending = 1;
+    const disapproved = 2;
+    const total = approved + pending + disapproved;
+
+    const approvedPercentage = (approved / total) * 100;
+    const pendingPercentage = (pending / total) * 100;
+    const disapprovedPercentage = (disapproved / total) * 100;
+
+    const approvedDash = (approvedPercentage / 100) * circumference;
+    const pendingDash = (pendingPercentage / 100) * circumference;
+    const disapprovedDash = (disapprovedPercentage / 100) * circumference;
 
     return (
-      <div className="relative w-48 h-48 mx-auto">
-        <svg width="192" height="192" viewBox="0 0 192 192" className="transform -rotate-90">
+      <div className="relative w-40 h-40 mx-auto">
+        <svg width="160" height="160" viewBox="0 0 160 160" className="transform -rotate-90">
           <circle
-            cx="96"
-            cy="96"
+            cx="80"
+            cy="80"
             r={radius}
             fill="none"
-            stroke="#E5E7EB"
-            strokeWidth="20"
+            stroke="#14B8A6"
+            strokeWidth="18"
+            strokeDasharray={`${approvedDash} ${circumference - approvedDash}`}
+            strokeLinecap="round"
           />
           <circle
-            cx="96"
-            cy="96"
+            cx="80"
+            cy="80"
             r={radius}
             fill="none"
-            stroke={color}
-            strokeWidth="20"
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
+            stroke="#F59E0B"
+            strokeWidth="18"
+            strokeDasharray={`${pendingDash} ${circumference - pendingDash}`}
+            strokeDashoffset={-approvedDash}
             strokeLinecap="round"
-            className="transition-all duration-1000 ease-out"
+          />
+          <circle
+            cx="80"
+            cy="80"
+            r={radius}
+            fill="none"
+            stroke="#EF4444"
+            strokeWidth="18"
+            strokeDasharray={`${disapprovedDash} ${circumference - disapprovedDash}`}
+            strokeDashoffset={-(approvedDash + pendingDash)}
+            strokeLinecap="round"
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center flex-col">
-          <div className="text-sm text-gray-600">Approved Products</div>
-          <div className="text-4xl font-bold text-gray-900">{recentProducts.length}</div>
+          <div className="text-xs text-gray-500">Total</div>
+          <div className="text-3xl font-bold text-gray-900">{total}</div>
+          <div className="text-xs text-gray-500">Products</div>
         </div>
       </div>
     );
@@ -389,17 +414,150 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Product Status */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <div className="bg-orange-500 px-6 py-4 flex items-center space-x-2">
-          <Package size={20} className="text-white" />
-          <h3 className="text-lg font-semibold text-white">Products Status</h3>
+      {/* Three Column Section: Product Status, Shop Review, Order Map */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Product Status */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div className="bg-orange-500 px-6 py-4 flex items-center space-x-2">
+            <Package size={20} className="text-white" />
+            <h3 className="text-lg font-semibold text-white">Products Status</h3>
+          </div>
+          <div className="p-6">
+            <MultiSegmentDonutChart />
+            <div className="mt-6 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-teal-500 rounded-full"></div>
+                  <span className="text-sm text-gray-600">Approved</span>
+                </div>
+                <span className="text-sm font-semibold text-gray-900">3</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <span className="text-sm text-gray-600">Pending</span>
+                </div>
+                <span className="text-sm font-semibold text-gray-900">1</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <span className="text-sm text-gray-600">Disapproved</span>
+                </div>
+                <span className="text-sm font-semibold text-gray-900">2</span>
+              </div>
+            </div>
+            <button className="mt-6 w-full px-4 py-3 bg-white text-gray-700 text-sm font-medium rounded-lg border-2 border-gray-300 hover:bg-gray-50 transition-colors">
+              View Details
+            </button>
+          </div>
         </div>
-        <div className="p-8">
-          <DonutChart percentage={100} color="#14B8A6" />
-          <button className="mt-6 w-full px-4 py-3 bg-white text-gray-700 text-sm font-medium rounded-lg border-2 border-gray-300 hover:bg-gray-50 transition-colors">
-            View Details
-          </button>
+
+        {/* Shop Review */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <Star size={20} className="text-yellow-400 fill-current" />
+              <h3 className="text-lg font-semibold text-gray-900">Shop Review</h3>
+            </div>
+            <button className="text-sm text-blue-600 hover:text-blue-800 font-medium">
+              View All
+            </button>
+          </div>
+          <div className="p-6">
+            <div className="text-center mb-6">
+              <div className="text-5xl font-bold text-gray-900">4.8</div>
+              <div className="flex items-center justify-center mt-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    size={20}
+                    className={i < 5 ? 'text-yellow-400 fill-current' : 'text-gray-300'}
+                  />
+                ))}
+              </div>
+              <p className="text-sm text-gray-500 mt-2">Based on 245 reviews</p>
+            </div>
+
+            <div className="space-y-3">
+              {[
+                { rating: 5, count: 180, percentage: 73 },
+                { rating: 4, count: 45, percentage: 18 },
+                { rating: 3, count: 15, percentage: 6 },
+                { rating: 2, count: 3, percentage: 1 },
+                { rating: 1, count: 2, percentage: 1 }
+              ].map((item) => (
+                <div key={item.rating} className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-1 w-12">
+                    <span className="text-sm font-medium text-gray-700">{item.rating}</span>
+                    <Star size={14} className="text-yellow-400 fill-current" />
+                  </div>
+                  <div className="flex-1 bg-gray-200 rounded-full h-2">
+                    <div
+                      className="bg-yellow-400 h-2 rounded-full"
+                      style={{ width: `${item.percentage}%` }}
+                    ></div>
+                  </div>
+                  <span className="text-sm text-gray-600 w-12 text-right">{item.count}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Order Map */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-900">Order Locations</h3>
+            <p className="text-sm text-gray-500 mt-1">Where orders are coming from</p>
+          </div>
+          <div className="p-6">
+            <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden">
+              <svg viewBox="0 0 800 400" className="w-full h-full">
+                <path
+                  d="M120,80 L150,90 L170,70 L200,75 L230,85 L260,80 L290,90 L320,95 L350,85 L380,80 L410,75 L440,70 L470,75 L500,80 L530,85 L560,90 L590,95 L620,100 L650,105 L680,110 L710,115 L740,120 M120,120 L130,140 L140,130 L150,145 L160,135 L170,150 L180,140 L190,155 L200,145 L210,160 L220,150 L230,165 L240,155 L250,170 L260,160 L270,175 L280,165 L290,180 L300,170 L310,185 L320,175 L330,190 L340,180 L350,195 L360,185 L370,200 L380,190 L390,205 L400,195 L410,210 L420,200 L430,215 L440,205 L450,220 L460,210 L470,225 L480,215 L490,230 L500,220 L510,235 L520,225 L530,240 L540,230 L550,245 L560,235 L570,250 L580,240 L590,255 L600,245 L610,260 L620,250 L630,265 L640,255 L650,270 L660,260 L670,275 L680,265 L690,280 L700,270 L710,285 L720,275 L730,290 L740,280 M100,200 L110,220 L115,215 L120,235 L125,225 L130,245 L135,235 L140,255 L145,245 L150,265 L155,255 L160,275 L165,265 L170,285 L175,275 L180,295"
+                  fill="none"
+                  stroke="#E5E7EB"
+                  strokeWidth="1"
+                />
+                <circle cx="200" cy="150" r="5" fill="#3B82F6" className="animate-pulse" />
+                <circle cx="350" cy="120" r="4" fill="#10B981" className="animate-pulse" />
+                <circle cx="500" cy="180" r="6" fill="#F59E0B" className="animate-pulse" />
+                <circle cx="620" cy="140" r="4" fill="#EF4444" className="animate-pulse" />
+                <circle cx="280" cy="200" r="5" fill="#8B5CF6" className="animate-pulse" />
+              </svg>
+            </div>
+            <div className="mt-4 space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <span className="text-gray-600">United States</span>
+                </div>
+                <span className="font-semibold text-gray-900">1,344</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-gray-600">India</span>
+                </div>
+                <span className="font-semibold text-gray-900">632</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <span className="text-gray-600">Cayman</span>
+                </div>
+                <span className="font-semibold text-gray-900">156</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <span className="text-gray-600">Poland</span>
+                </div>
+                <span className="font-semibold text-gray-900">89</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

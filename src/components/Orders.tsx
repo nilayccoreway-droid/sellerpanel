@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Eye, Filter, Download } from 'lucide-react';
+import OrderDetails from './OrderDetails';
 
 const Orders: React.FC = () => {
   const [filterStatus, setFilterStatus] = useState('all');
+  const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
 
   const orders = [
     {
@@ -66,6 +68,15 @@ const Orders: React.FC = () => {
     return matchesStatus;
   });
 
+  if (selectedOrderId) {
+    return (
+      <OrderDetails
+        orderId={selectedOrderId.replace('#', '')}
+        onBack={() => setSelectedOrderId(null)}
+      />
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -85,7 +96,7 @@ const Orders: React.FC = () => {
       {/* Filters and Search */}
       <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
         <div className="flex items-center justify-end space-x-3">
-            <select 
+            <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
               className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -152,7 +163,11 @@ const Orders: React.FC = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <button className="text-blue-600 hover:text-blue-900 transition-colors">
+                    <button
+                      onClick={() => setSelectedOrderId(order.id)}
+                      className="text-blue-600 hover:text-blue-900 transition-colors"
+                      title="View Order Details"
+                    >
                       <Eye size={18} />
                     </button>
                   </td>
